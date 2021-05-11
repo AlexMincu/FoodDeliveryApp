@@ -49,6 +49,7 @@ public class RestaurantsPage extends JFrame {
         // Export everything when closing the window
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
+                logger.info("Closing app");
                 service.exportAll();
                 dispose();
                 System.exit(0);
