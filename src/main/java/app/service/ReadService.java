@@ -1,4 +1,9 @@
-package app;
+package app.service;
+
+import app.model.Account;
+import app.model.Deliverer;
+import app.model.Product;
+import app.model.Restaurant;
 
 import java.io.*;
 import java.util.List;
@@ -13,19 +18,20 @@ public class ReadService {
     }
 
     public static ReadService getInstance() {
-        if(single_instance == null)
+        if (single_instance == null)
             single_instance = new ReadService();
         return single_instance;
     }
 
-    public void importAccounts(Map<String, Account> accounts){
+
+    public void importAccounts(Map<String, Account> accounts) {
         try {
             Scanner reader = new Scanner(new File("accounts.csv"));
-            while(reader.hasNextLine()) {
+            while (reader.hasNextLine()) {
                 String line = reader.nextLine();
 
                 String[] field = line.split(",");
-                accounts.put(field[2], new Account(field[2], field[0], field[1], field[4], field[3], field[5]));
+                accounts.put(field[0], new Account(field[0], field[1], field[2], field[3], field[4], field[5]));
             }
 
         } catch (FileNotFoundException e) {
@@ -33,14 +39,21 @@ public class ReadService {
         }
     }
 
-    public void importRestaurants(Map<Integer, Restaurant> locals){
+    public void importRestaurants(Map<Integer, Restaurant> locals) {
         try {
             Scanner reader = new Scanner(new File("restaurants.csv"));
-            while(reader.hasNextLine()) {
+            while (reader.hasNextLine()) {
                 String line = reader.nextLine();
 
                 String[] field = line.split(",");
-                locals.put(Integer.parseInt(field[0]), new Restaurant(field[1], field[2], field[3], field[4], field[5], field[6]));
+                locals.put(Integer.parseInt(field[0]),
+                        new Restaurant(
+                                field[1],
+                                field[2],
+                                field[3],
+                                Double.parseDouble(field[4]),
+                                Integer.parseInt(field[5]),
+                                Double.parseDouble(field[6])));
             }
 
         } catch (FileNotFoundException e) {
@@ -51,11 +64,15 @@ public class ReadService {
     public void importProducts(Map<Integer, Restaurant> locals) {
         try {
             Scanner reader = new Scanner(new File("products.csv"));
-            while(reader.hasNextLine()) {
+            while (reader.hasNextLine()) {
                 String line = reader.nextLine();
 
                 String[] field = line.split(",");
-                locals.get(Integer.parseInt(field[0])).addProduct(new Product(field[1], field[2], field[3]));
+                locals.get(Integer.parseInt(field[0])).addProduct(
+                        new Product(
+                                field[1],
+                                Double.parseDouble(field[2]),
+                                field[3]));
             }
 
         } catch (FileNotFoundException e) {
@@ -66,7 +83,7 @@ public class ReadService {
     public void importDeliverers(List<Deliverer> deliverers) {
         try {
             Scanner reader = new Scanner(new File("deliverers.csv"));
-            while(reader.hasNextLine()) {
+            while (reader.hasNextLine()) {
                 String line = reader.nextLine();
 
                 String[] field = line.split(",");

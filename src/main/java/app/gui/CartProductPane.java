@@ -1,7 +1,8 @@
 package app.gui;
 
-import app.Product;
-import app.Service;
+import app.model.OrderProduct;
+import app.model.Product;
+import app.service.Service;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,8 @@ public class CartProductPane extends JPanel{
     private JLabel quantityLabel;
     private JButton addButton;
     private JButton removeButton;
+    private Service service = Service.getInstance();
+
 
     CartProductPane(Product product) {
         this.setPreferredSize(new Dimension(430, 60));
@@ -25,7 +28,6 @@ public class CartProductPane extends JPanel{
         this.setBackground(Color.lightGray);
         this.setLayout(null);
 
-        Service service = Service.getInstance();
 
         productLabel = new JLabel();
         productLabel.setBounds(0, 0, 350, 30);
@@ -45,10 +47,11 @@ public class CartProductPane extends JPanel{
         descriptionLabel.setBackground(Color.cyan);
         descriptionLabel.setOpaque(false);
 
-        quantityLabel = new JLabel("x" + service.getCartSize().get(product.getName()).toString());
+        quantityLabel = new JLabel();
         quantityLabel.setBounds(370, 30, 30, 30);
         quantityLabel.setOpaque(true);
         quantityLabel.setBackground(Color.green);
+        updateQuantityLabel(product);
 
         removeButton = new JButton("-");
         removeButton.setBorder(null);
@@ -75,12 +78,7 @@ public class CartProductPane extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 service.removeFromCart(product);
-
-                Integer quantity = service.getCartSize().get(product.getName());
-                if(quantity != null)
-                    quantityLabel.setText("x" + quantity.toString());
-                else
-                    quantityLabel.setText("0");
+                updateQuantityLabel(product);
             }
         });
 
@@ -88,10 +86,20 @@ public class CartProductPane extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 service.addToCart(product);
-
-                Integer quantity = service.getCartSize().get(product.getName());
-                quantityLabel.setText("x" + quantity.toString());
+                updateQuantityLabel(product);
             }
         });
+    }
+
+    private void updateQuantityLabel(Product product) {
+        var cart = service.getCart();
+
+        int quantity = 0;
+        for(var p : cart) {
+            if(p.getProduct().equals(product))
+                quantity = p.getQuantity();
+        }
+
+        quantityLabel.setText("x" + quantity);
     }
 }

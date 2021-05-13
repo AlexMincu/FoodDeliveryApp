@@ -1,7 +1,7 @@
 package app.gui;
 
-import app.Restaurant;
-import app.Service;
+import app.model.Restaurant;
+import app.service.Service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

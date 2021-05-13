@@ -1,6 +1,6 @@
 package app.gui;
 
-import app.Service;
+import app.service.Service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,6 +1,8 @@
-package app;
+package app.service;
 
+import app.config.setupDB;
 import app.gui.*;
+import app.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,12 +15,7 @@ public class Service {
     private Map<String, Account> accounts;
     private Map<Integer, Restaurant> locals;
     private List<Deliverer> deliverers;
-    private Map<String, Product> cart;
-    private Map<String, Integer> cartSize;
-
-    // NEEDS REVAMP
-//    private Receipt receipt;
-//    private List<Delivery> deliveries;
+    private List<OrderProduct> cart;
 
     private Logger logger = LogManager.getLogger(Service.class);
 
@@ -28,18 +25,17 @@ public class Service {
         this.accounts = new HashMap<>();
         this.locals = new HashMap<>();
         this.deliverers = new ArrayList<>();
-        this.cart = new HashMap<>();
-        this.cartSize = new HashMap<>();
-
-        // NEEDS REVAMP
-//        this.receipt = null;
-//        this.deliveries = new ArrayList<>();
+        this.cart = new ArrayList<>();
     }
 
     public static Service getInstance() {
         if(single_instance == null)
             single_instance = new Service();
         return single_instance;
+    }
+
+    public void connectDB() {
+        setupDB.initDB();
     }
 
     // GUI and other useful methods
@@ -114,7 +110,7 @@ public class Service {
 
         String check = new String(checks);
         if(check.equals("11111") && accounts.get(email) == null) {
-            accounts.put(email, new Account(email, name, surname, phoneNo, password, address));
+            accounts.put(email, new Account(email, password, name, surname, phoneNo, address));
         }
         else
             System.out.println("Email already taken");
@@ -192,27 +188,32 @@ public class Service {
     // Cart
     public void addToCart(Product product) {
         logger.debug("Adding product to cart - [" + product.getName() + "]");
-        if(cart.get(product.getName()) == null){
-            cart.put(product.getName(), product);
-            cartSize.put(product.getName(), 1);
-        }
-        else {
-            cartSize.replace(product.getName(), cartSize.get(product.getName()) + 1);
-        }
+
+        boolean found = false;
+        for(var p : cart)
+            if(p.getProduct().equals(product)) {
+                p.setQuantity(p.getQuantity() + 1);
+
+                found = true;
+                break;
+            }
+
+        if(!found)
+            cart.add(new OrderProduct(product, 1));
     }
 
     public void removeFromCart(Product product){
         logger.debug("Removing product from cart - [" + product.getName() + "]");
-        if(cart.get(product.getName()) == null) {
-//            System.out.println("product doesnt appear to be in cart anymore");
-        }
-        else if(cartSize.get(product.getName()) <= 1) {
-            cart.remove(product.getName());
-            cartSize.remove(product.getName());
-        }
-        else {
-            cartSize.replace(product.getName(), cartSize.get(product.getName()) - 1);
-        }
+
+        for(var p : cart)
+            if(p.getProduct().equals(product)) {
+                if(p.getQuantity() > 1)
+                    p.setQuantity(p.getQuantity() - 1);
+                else
+                    cart.remove(p);
+
+                break;
+            }
     }
 
     public void flushCart() {
@@ -222,10 +223,14 @@ public class Service {
         }
     }
 
-    public Map<String, Product> getCart() {
+    public List<OrderProduct> getCart() {
         return cart;
     }
-    public Map<String, Integer> getCartSize() {
-        return cartSize;
+
+    public void createOrder(String address) {
+        Order order = new Order(currentAccount, address, cart);
+        System.out.println(order);
+
+        logger.info("Order created successfully");
     }
 }

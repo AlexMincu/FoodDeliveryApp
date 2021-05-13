@@ -1,7 +1,8 @@
 package app.gui;
 
-import app.Restaurant;
-import app.Service;
+import app.model.Order;
+import app.model.Restaurant;
+import app.service.Service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -53,10 +54,9 @@ public class CartPage extends JFrame{
         newAddressField.setText(service.getCurrentAccount().getAddress());
 
         var cart = service.getCart();
-        var cartSize = service.getCartSize();
 
-        for(var productName : cart.keySet()){
-            CartProductPane p = new CartProductPane(cart.get(productName));
+        for(var product : cart){
+            CartProductPane p = new CartProductPane(product.getProduct());
             contentPanel.add(p);
             contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
@@ -106,7 +106,8 @@ public class CartPage extends JFrame{
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                logger.info("Delivery created successfully");
+                service.createOrder(newAddressField.getText());
+
                 new RestaurantsPage();
                 dispose();
             }
@@ -133,17 +134,15 @@ public class CartPage extends JFrame{
         logger.debug("Refresh page");
 
         var cart = service.getCart();
-        var cartSize = service.getCartSize();
 
         double sum = 0;
-        for(var productName : cart.keySet())
-            for(var quantity = 0; quantity < cartSize.get(productName); quantity++)
-                sum += Double.parseDouble(cart.get(productName).getPrice());
+        for(var listed_product : cart)
+            sum += listed_product.getPrice();
         paymentProductsValueLabel.setText(sum + " LEI     ");
 
         paymentDeliveryValueLabel.setText(restaurant.getDelivery_price() + " LEI     ");
 
-        sum += Double.parseDouble(restaurant.getDelivery_price());
+        sum += restaurant.getDelivery_price();
         paymentTotalValueLabel.setText(sum + " LEI     ");
     }
 

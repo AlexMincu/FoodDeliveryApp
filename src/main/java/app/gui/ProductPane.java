@@ -1,7 +1,7 @@
 package app.gui;
 
-import app.Product;
-import app.Service;
+import app.model.Product;
+import app.service.Service;
 
 import javax.swing.*;
 import java.awt.*;

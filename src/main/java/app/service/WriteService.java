@@ -1,4 +1,8 @@
-package app;
+package app.service;
+
+import app.model.Account;
+import app.model.Deliverer;
+import app.model.Restaurant;
 
 import java.io.*;
 import java.util.List;
@@ -22,10 +26,10 @@ public class WriteService {
             FileWriter writer = new FileWriter("accounts.csv");
 
             for(var email : accounts.keySet()) {
-                writer.write(accounts.get(email).getName() + ",");
-                writer.write(accounts.get(email).getSurname() + ",");
                 writer.write(accounts.get(email).getEmail() + ",");
                 writer.write(accounts.get(email).getPassword() + ",");
+                writer.write(accounts.get(email).getName() + ",");
+                writer.write(accounts.get(email).getSurname() + ",");
                 writer.write(accounts.get(email).getPhoneNo() + ",");
                 writer.write(accounts.get(email).getAddress() + "\n");
             }
@@ -44,10 +48,10 @@ public class WriteService {
                 writer.write(id.toString() + ",");
                 writer.write(locals.get(id).getName() + ",");
                 writer.write(locals.get(id).getAddress() + ",");
+                writer.write(locals.get(id).getDescription() + ",");
                 writer.write(locals.get(id).getDelivery_price() + ",");
-                writer.write(locals.get(id).getScore() + ",");
                 writer.write(locals.get(id).getDelivery_time() + ",");
-                writer.write(locals.get(id).getDescription() + "\n");
+                writer.write(locals.get(id).getScore() + "\n");
             }
             writer.close();
 
@@ -55,7 +59,6 @@ public class WriteService {
             System.out.println("A problem has occurred when exporting the restaurants");
         }
     }
-
 
     public void exportProducts(Map<Integer, Restaurant> locals) {
         try {
@@ -84,7 +87,7 @@ public class WriteService {
                 writer.write(deliverer.getName() + ",");
                 writer.write(deliverer.getSurname() + ",");
                 writer.write(deliverer.getPhoneNo() + ",");
-                writer.write(deliverer.getVehicle() + "\n");
+                writer.write(deliverer.getVehicle().toString() + "\n");
             }
             writer.close();
 

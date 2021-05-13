@@ -1,6 +1,6 @@
 package app.gui;
 
-import app.Restaurant;
+import app.model.Restaurant;
 
 import javax.swing.*;
 import java.awt.*;

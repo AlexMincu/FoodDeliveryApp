@@ -1,24 +1,32 @@
-package app;
+package app.model;
 
 public class Account {
     private String email;
+    private String password;
+
     private String name;
     private String surname;
     private String phoneNo;
-    private String password;
     private String address;
 
-    public Account(String email, String name, String surname, String phoneNo, String password, String address) {
+
+    public Account(String email, String password, String name, String surname, String phoneNo, String address) {
         this.email = email;
+        this.password = password;
+
         this.name = name;
         this.surname = surname;
         this.phoneNo = phoneNo;
-        this.password = password;
         this.address = address;
     }
 
+
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getName() {
@@ -33,16 +41,17 @@ public class Account {
         return phoneNo;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public String getAddress() {
         return address;
     }
 
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setName(String name) {
@@ -57,13 +66,10 @@ public class Account {
         this.phoneNo = phoneNo;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public void setAddress(String address) {
         this.address = address;
     }
+
 
     @Override
     public String toString() {
