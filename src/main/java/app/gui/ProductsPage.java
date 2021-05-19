@@ -1,7 +1,7 @@
 package app.gui;
 
 import app.model.Restaurant;
-import app.service.Service;
+import app.service.BaseService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,7 +35,6 @@ public class ProductsPage extends JFrame{
         this.setLocation(screenSize.width/2 - this.getWidth()/2, 0);
         this.pack();
         this.setVisible(true);
-        Service service = Service.getInstance();
 
         Logger logger = LogManager.getLogger(ProductsPage.class);
         logger.info("Initiated page of restaurant: " + restaurant.getName());
@@ -62,7 +61,6 @@ public class ProductsPage extends JFrame{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Service service = Service.getInstance();
                 new RestaurantsPage();
                 dispose();
             }
@@ -81,7 +79,6 @@ public class ProductsPage extends JFrame{
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 logger.info("Closing app");
-//                service.exportAll();
                 dispose();
                 System.exit(0);
             }

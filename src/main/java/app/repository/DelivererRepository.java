@@ -44,6 +44,7 @@ public class DelivererRepository {
 
         if (result.next())
             return new Deliverer(
+                    result.getInt(1),
                     result.getString(2),
                     result.getString(3),
                     result.getString(4),
@@ -74,6 +75,7 @@ public class DelivererRepository {
 
         while (result.next()) {
             Deliverer currentDeliverer = new Deliverer(
+                    result.getInt(1),
                     result.getString(2),
                     result.getString(3),
                     result.getString(4),

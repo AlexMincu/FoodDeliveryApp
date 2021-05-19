@@ -35,10 +35,23 @@ public class OrderRepository {
         String select = "SELECT MAX(id_order) FROM `order`";
 
         Connection connection = SqlConfig.getDataBaseConnection();
+
         Statement statement = connection.createStatement();
         ResultSet result = statement.executeQuery(select);
 
+        result.next();
         return result.getInt(1);
+    }
+
+    public int removeOrderById(int id_order) throws SQLException {
+        String remove = "DELETE FROM `order` WHERE id_order = ?";
+
+        Connection connection = SqlConfig.getDataBaseConnection();
+
+        PreparedStatement statement = connection.prepareStatement(remove);
+        statement.setInt(1, id_order);
+
+        return statement.executeUpdate();
     }
 
     public int updateStatus(String newStatus, int id_order) throws SQLException {

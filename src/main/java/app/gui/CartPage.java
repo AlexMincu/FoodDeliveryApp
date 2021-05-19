@@ -1,6 +1,5 @@
 package app.gui;
 
-import app.model.Order;
 import app.model.Restaurant;
 import app.service.Service;
 import org.apache.logging.log4j.LogManager;
@@ -33,6 +32,7 @@ public class CartPage extends JFrame{
     private JLabel paymentTotalValueLabel;
     private JButton confirmButton;
     private JButton refreshButton;
+    Service service = Service.getInstance();
 
     CartPage(Restaurant restaurant) {
         this.setContentPane(mainPanel);
@@ -44,7 +44,6 @@ public class CartPage extends JFrame{
         this.setLocation(screenSize.width/2 - this.getWidth()/2, 0);
         this.pack();
         this.setVisible(true);
-        Service service = Service.getInstance();
 
         Logger logger = LogManager.getLogger(CartPage.class);
         logger.info("Initiated page");
@@ -118,7 +117,6 @@ public class CartPage extends JFrame{
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 logger.info("Closing app");
-//                service.exportAll();
                 dispose();
                 System.exit(0);
             }
@@ -129,7 +127,6 @@ public class CartPage extends JFrame{
 
     // Update the price of delivery
     void updatePrices(Restaurant restaurant) {
-        Service service = Service.getInstance();
         Logger logger = LogManager.getLogger(CartPage.class);
         logger.debug("Refresh page");
 

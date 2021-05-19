@@ -10,7 +10,7 @@ public class Deliverer {
     private Vehicle vehicle;
     private boolean busy;
 
-    public Deliverer(String name, String surname, String phoneNo, Vehicle vehicle) {
+    public Deliverer(int id_deliverer, String name, String surname, String phoneNo, Vehicle vehicle) {
         this.name = name;
         this.surname = surname;
         this.phoneNo = phoneNo;
@@ -18,6 +18,10 @@ public class Deliverer {
         this.busy = false;
     }
 
+
+    public int getId_deliverer() {
+        return id_deliverer;
+    }
 
     public String getName() {
         return name;
@@ -39,6 +43,10 @@ public class Deliverer {
         return busy;
     }
 
+
+    public void setId_deliverer(int id_deliverer) {
+        this.id_deliverer = id_deliverer;
+    }
 
     public void setName(String name) {
         this.name = name;

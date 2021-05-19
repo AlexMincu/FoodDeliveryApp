@@ -1,6 +1,5 @@
 package app.gui;
 
-import app.model.OrderProduct;
 import app.model.Product;
 import app.service.Service;
 

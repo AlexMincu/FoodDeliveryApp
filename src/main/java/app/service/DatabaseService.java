@@ -10,18 +10,20 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class DatabaseService {
+public class DatabaseService extends BaseService{
     private static DatabaseService single_instance = new DatabaseService();
     private Logger logger = LogManager.getLogger(DatabaseService.class);
-    
-    private Service service = Service.getInstance();
+
     private AccountRepository accRep = AccountRepository.getInstance();
     private DelivererRepository delRep = DelivererRepository.getInstance();
     private RestaurantRepository restRep = RestaurantRepository.getInstance();
     private ProductRepository prodRep = ProductRepository.getInstance();
     private OrderRepository ordRep = OrderRepository.getInstance();
+    private OrderProductRepository ordProdRep = OrderProductRepository.getInstance();
 
-    private DatabaseService() {}
+    protected DatabaseService() {
+        super();
+    }
 
     public static DatabaseService getInstance() {
         if(single_instance == null)
@@ -38,17 +40,17 @@ public class DatabaseService {
         logger.info("Importing fields from DB");
 
         logger.debug("Importing accounts from DB...");
-        service.setAccounts(getAccountsFromDB());
+        setAccounts(getAccountsFromDB());
 
         logger.debug("Importing restaurants from DB...");
-        service.setRestaurants(getRestaurantsFromDB());
+        setRestaurants(getRestaurantsFromDB());
 
         logger.debug("Importing deliverers from DB...");
-        service.setDeliverers(getDeliverersFromDB());
+        setDeliverers(getDeliverersFromDB());
 
         logger.debug("Importing products from DB...");
-        for(var id_restaurant : service.getRestaurants().keySet()) {
-            service.getRestaurants().get(id_restaurant).
+        for(var id_restaurant : getRestaurants().keySet()) {
+            getRestaurants().get(id_restaurant).
                     setProducts(getAllProductsByRestaurantIdFromDB(id_restaurant));
         }
     }
@@ -213,9 +215,9 @@ public class DatabaseService {
         }
 
         if(rows_affected == 1)
-            logger.info("Deliverer '" + service.getDeliverers().get(id_deliverer).getFullName() + "' deleted from DB");
+            logger.info("Deliverer '" + getDeliverers().get(id_deliverer).getFullName() + "' deleted from DB");
         else
-            logger.warn("Couldn't delete deliverer '" + service.getDeliverers().get(id_deliverer).getFullName() + "' from DB");
+            logger.warn("Couldn't delete deliverer '" + getDeliverers().get(id_deliverer).getFullName() + "' from DB");
     }
 
     public Deliverer getDelivererByIdFromDB(int id_deliverer){
@@ -333,9 +335,9 @@ public class DatabaseService {
         }
 
         if(rows_affected == 1)
-            logger.info("Restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "' deleted");
+            logger.info("Restaurant '" + getRestaurants().get(id_restaurant).getName() + "' deleted");
         else
-            logger.warn("Couldn't delete restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "'");
+            logger.warn("Couldn't delete restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
     }
 
     public Restaurant getRestaurantByIdFromDB(int id_restaurant){
@@ -348,7 +350,7 @@ public class DatabaseService {
         }
 
         if(restaurant == null)
-            logger.warn("Restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "' doesn't exist");
+            logger.warn("Restaurant '" + getRestaurants().get(id_restaurant).getName() + "' doesn't exist");
 
         return restaurant;
     }
@@ -393,9 +395,9 @@ public class DatabaseService {
         }
 
         if(rows_affected == 1)
-            logger.info("Updated Address for restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "'");
+            logger.info("Updated Address for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
         else
-            logger.warn("Couldn't update Address for restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "'");
+            logger.warn("Couldn't update Address for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
     }
 
     public void updateRestaurantDescriptionFromDB(String newDescription, int id_restaurant) {
@@ -408,9 +410,9 @@ public class DatabaseService {
         }
 
         if(rows_affected == 1)
-            logger.info("Updated Description for restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "'");
+            logger.info("Updated Description for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
         else
-            logger.warn("Couldn't update Description for restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "'");
+            logger.warn("Couldn't update Description for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
     }
 
     public void updateRestaurantDeliveryPriceFromDB(double newDeliveryPrice, int id_restaurant) {
@@ -423,9 +425,9 @@ public class DatabaseService {
         }
 
         if(rows_affected == 1)
-            logger.info("Updated Delivery Price for restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "'");
+            logger.info("Updated Delivery Price for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
         else
-            logger.warn("Couldn't update Delivery Price for restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "'");
+            logger.warn("Couldn't update Delivery Price for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
     }
 
     public void updateRestaurantScoreFromDB(double newScore, int id_restaurant) {
@@ -438,9 +440,9 @@ public class DatabaseService {
         }
 
         if(rows_affected == 1)
-            logger.info("Updated Score for restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "'");
+            logger.info("Updated Score for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
         else
-            logger.warn("Couldn't update Score for restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "'");
+            logger.warn("Couldn't update Score for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
     }
 
     public void updateRestaurantDeliveryTimeFromDB(int newDeliveryTime, int id_restaurant) {
@@ -453,9 +455,9 @@ public class DatabaseService {
         }
 
         if(rows_affected == 1)
-            logger.info("Updated Delivery Time for restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "'");
+            logger.info("Updated Delivery Time for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
         else
-            logger.warn("Couldn't update Delivery Time for restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "'");
+            logger.warn("Couldn't update Delivery Time for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
     }
 
 
@@ -516,7 +518,7 @@ public class DatabaseService {
         }
 
         if(products == null)
-            logger.warn("There are no products inside DB for restaurant '" + service.getRestaurants().get(id_restaurant).getName() + "'");
+            logger.warn("There are no products inside DB for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
 
         return products;
     }
@@ -599,6 +601,21 @@ public class DatabaseService {
         return id;
     }
 
+    public void deleteOrderByIdFromDB(int id_order) {
+        int rows_affected = 0;
+
+        try {
+            rows_affected = ordRep.removeOrderById(id_order);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        if(rows_affected == 1)
+            logger.info("Order with id '" + id_order + "' deleted from DB");
+        else
+            logger.warn("Couldn't delete order with id '" + id_order + "' from DB");
+    }
+
     public void updateOrderStatusFromDB(Order.Status newStatus, int id_order) {
         int rows_affected = 0;
 
@@ -629,4 +646,74 @@ public class DatabaseService {
             logger.warn("Couldn't update Deliverer for order with id '" + id_order + "'");
     }
 
+
+
+    // OrderProduct DB Functions
+    public void addOrderProductToDB(OrderProduct orderProduct, int id_order) {
+        int rows_affected = 0;
+
+        try {
+            rows_affected = ordProdRep.insertOrderProduct(orderProduct, id_order);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        if(rows_affected == 1)
+            logger.info("Product '" + orderProduct.getProduct().getName() + "' added to DB list " +
+                    "for order with id '" + id_order + "'");
+        else
+            logger.warn("Couldn't add product '" + orderProduct.getProduct().getName() + "' to DB list " +
+                    "for order with id '" + id_order + "'");
+    }
+
+    public void deleteOrderProductByIdFromDB(int id_product, int id_order) {
+        int rows_affected = 0;
+
+        try {
+            rows_affected = ordProdRep.removeOrderProductByIds(id_product, id_order);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        if(rows_affected == 1)
+            logger.info("Product with id '" + id_product + "' deleted from DB list " +
+                    "of order with id '" + id_order + "'");
+        else
+            logger.warn("Couldn't delete product with id '" + id_product + "' from DB list " +
+                    "of order with id '" + id_order + "'");
+    }
+
+    public void updateOrderProductQuantityFromDB(int quantity, int id_product, int id_order) {
+        int rows_affected = 0;
+
+        try {
+            rows_affected = ordProdRep.updateOrderProductQuantity(quantity, id_product, id_order);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        if(rows_affected == 1)
+            logger.info("Updated Quantity for product with id '" + id_product + "' from DB list " +
+                    "of order with id '" + id_order + "'");
+        else
+            logger.warn("Couldn't update Quantity for product with id '" + id_product + "' from DB list " +
+                    "of order with id '" + id_order + "'");
+    }
+
+    public void updateOrderProductPriceFromDB(double price, int id_product, int id_order) {
+        int rows_affected = 0;
+
+        try {
+            rows_affected = ordProdRep.updateOrderProductPrice(price, id_product, id_order);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        if(rows_affected == 1)
+            logger.info("Updated Price for product with id '" + id_product + "' from DB list " +
+                    "of order with id '" + id_order + "'");
+        else
+            logger.warn("Couldn't update Price for product with id '" + id_product + "' from DB list " +
+                    "of order with id '" + id_order + "'");
+    }
 }

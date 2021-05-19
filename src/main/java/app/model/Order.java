@@ -89,6 +89,7 @@ public class Order {
         String string =
                 "        Order information:        \n" +
                 "----------------------------------\n" +
+                "Order ID: " + id_order + "\n" +
                 "Email: " + email + "\n" +
                 "Address: " + address + "\n" +
                 "Price: " + price + "\n" +
