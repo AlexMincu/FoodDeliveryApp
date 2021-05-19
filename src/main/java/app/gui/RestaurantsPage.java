@@ -36,8 +36,8 @@ public class RestaurantsPage extends JFrame {
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
         // Insert restaurant panels
-        for(var id : service.getLocals().keySet()) {
-            RestaurantPane rest = new RestaurantPane(this, service.getLocals().get(id));
+        for(var id : service.getRestaurants().keySet()) {
+            RestaurantPane rest = new RestaurantPane(this, service.getRestaurants().get(id));
             rest.setAlignmentX(JPanel.LEFT_ALIGNMENT);
             rest.setAlignmentY(JPanel.TOP_ALIGNMENT);
             contentPanel.add(rest);
@@ -50,7 +50,7 @@ public class RestaurantsPage extends JFrame {
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 logger.info("Closing app");
-                service.exportAll();
+//                service.exportAll();
                 dispose();
                 System.exit(0);
             }

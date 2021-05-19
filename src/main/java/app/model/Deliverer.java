@@ -3,6 +3,7 @@ package app.model;
 public class Deliverer {
     public enum Vehicle {NONE, BICYCLE, MOTORCYCLE, CAR}
 
+    private int id_deliverer;
     private String name;
     private String surname;
     private String phoneNo;
@@ -68,5 +69,18 @@ public class Deliverer {
                 "Phone Number: " + phoneNo + "\n" +
                 "Vehicle: " + vehicle.toString() + "\n" +
                 "Busy: " + busy + "\n";
+    }
+
+    public static Vehicle toVehicle(String vehicleString) {
+        return switch (vehicleString) {
+            case "BICYCLE" -> Deliverer.Vehicle.BICYCLE;
+            case "MOTORCYCLE" -> Deliverer.Vehicle.MOTORCYCLE;
+            case "CAR" -> Deliverer.Vehicle.CAR;
+            default -> Deliverer.Vehicle.NONE;
+        };
+    }
+
+    public String getFullName() {
+        return name + " " + surname;
     }
 }

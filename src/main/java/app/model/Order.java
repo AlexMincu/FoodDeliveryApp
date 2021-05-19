@@ -5,7 +5,8 @@ import java.util.List;
 public class Order {
     public enum Status {UNKNOWN, CONFIRMED, DELIVERING, DELIVERED, CANCELED}
 
-    private Account account;
+    private int id_order;
+    private String email;
     private String address;
     private List<OrderProduct> order_list;
     private double price;
@@ -13,8 +14,8 @@ public class Order {
     private Status status;
 
 
-    public Order(Account account, String address, List<OrderProduct> order_list) {
-        this.account = account;
+    public Order(String email, String address, List<OrderProduct> order_list) {
+        this.email = email;
         this.address = address;
         this.order_list = order_list;
         double sum = 0;
@@ -27,8 +28,8 @@ public class Order {
     }
 
 
-    public Account getAccount() {
-        return account;
+    public String getEmail() {
+        return email;
     }
 
     public String getAddress() {
@@ -51,9 +52,12 @@ public class Order {
         return status;
     }
 
+    public int getId_order() {
+        return id_order;
+    }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setAddress(String address) {
@@ -76,13 +80,16 @@ public class Order {
         this.status = status;
     }
 
+    public void setId_order(int id_order) {
+        this.id_order = id_order;
+    }
 
     @Override
     public String toString() {
         String string =
                 "        Order information:        \n" +
                 "----------------------------------\n" +
-                "Name: " + account.getName() + " " + account.getSurname() + "\n" +
+                "Email: " + email + "\n" +
                 "Address: " + address + "\n" +
                 "Price: " + price + "\n" +
                 "Status: " + status + "\n" +
@@ -95,6 +102,16 @@ public class Order {
         string = string.concat("----------------------------------\n");
 
         return string;
+    }
+
+    public static Order.Status toStatus(String statusString) {
+        return switch (statusString) {
+            case "CONFIRMED" -> Status.CONFIRMED;
+            case "DELIVERING" -> Status.DELIVERING;
+            case "DELIVERED" -> Status.DELIVERED;
+            case "CANCELED" -> Status.CANCELED;
+            default -> Status.UNKNOWN;
+        };
     }
 
 }

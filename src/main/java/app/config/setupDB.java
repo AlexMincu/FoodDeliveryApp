@@ -16,15 +16,14 @@ public class setupDB {
     public static void initDB() {
         String accountTable =
                 "CREATE TABLE IF NOT EXISTS `account` (" +
-                        "`id_account` 	int 			NOT NULL AUTO_INCREMENT," +
-                        "`email`			varchar(50) 	NOT NULL," +
+                        "`email`		varchar(50) 	NOT NULL," +
                         "`password`		varchar(50) 	NOT NULL," +
                         "`name`			varchar(50) 	NOT NULL," +
                         "`surname`		varchar(50) 	NOT NULL," +
                         "`phoneNo`		varchar(15)		NOT NULL," +
                         "`address`		varchar(50)		NOT NULL," +
 
-                        "PRIMARY KEY (`id_account`) )";
+                        "PRIMARY KEY (`email`) )";
 
         String delivererTable =
                 "CREATE TABLE IF NOT EXISTS `deliverer` (" +
@@ -41,11 +40,12 @@ public class setupDB {
                 "CREATE TABLE IF NOT EXISTS `restaurant` (" +
                         "`id_restaurant` int 			NOT NULL AUTO_INCREMENT," +
                         "`name`			varchar(50) 	NOT NULL," +
+                        "`address`			varchar(50) 	NOT NULL," +
                         "`description`	varchar(200) 	DEFAULT NULL," +
 
-                        "`delivery_price` varchar(5)		NOT NULL," +
-                        "`delivery_time`	varchar(5)		NOT NULL," +
-                        "`score`			varchar(5)		NOT NULL," +
+                        "`delivery_price` double		NOT NULL," +
+                        "`delivery_time`	int		NOT NULL," +
+                        "`score`			double		NOT NULL," +
 
                         "PRIMARY KEY (`id_restaurant`) )";
 
@@ -54,7 +54,7 @@ public class setupDB {
                         "`id_product` 	int 			NOT NULL AUTO_INCREMENT," +
                         "`id_restaurant`	int				NOT NULL," +
                         "`name`			varchar(50) 	NOT NULL," +
-                        "`price`			varchar(10) 	DEFAULT NULL," +
+                        "`price`			double 	NOT NULL," +
                         "`description`	varchar(200) 	DEFAULT NULL," +
 
                         "PRIMARY KEY (`id_product`)," +
@@ -63,43 +63,43 @@ public class setupDB {
                         "FOREIGN KEY (`id_restaurant`) " +
                         "REFERENCES `restaurant` (`id_restaurant`) )";
 
-        String orderListTable =
-                "CREATE TABLE IF NOT EXISTS `order_list` (" +
-                        "`id_order_list` int 			NOT NULL AUTO_INCREMENT," +
-                        "`id_product`	int				NOT NULL," +
-
-                        "`quantity`		varchar(10)		NOT NULL," +
-                        "`total_price`	varchar(10) 	NOT NULL," +
-
-                        "PRIMARY KEY (`id_order_list`)," +
-
-                        "CONSTRAINT `fk-order_list-product` " +
-                        "FOREIGN KEY (`id_product`) " +
-                        "REFERENCES `product` (`id_product`))";
-
         String orderTable =
                 "CREATE TABLE IF NOT EXISTS `order` (" +
                         "`id_order` 		int 			NOT NULL AUTO_INCREMENT," +
-                        " `id_account`	int				NOT NULL," +
-                        " `id_deliverer`	int				NOT NULL," +
-                        "`id_order_list`	int				NOT NULL," +
+                        "`email`	        varchar(50)		NOT NULL," +
+                        "`address`	        varchar(50)		NOT NULL," +
+                        "`id_deliverer`	    int				DEFAULT NULL," +
 
-                        "`total_price`	varchar(20) 	NOT NULL," +
+                        "`total_price`	double  	NOT NULL," +
                         "`status`		varchar(50)		NOT NULL," +
 
                         "PRIMARY KEY (`id_order`)," +
 
                         "CONSTRAINT `fk-order-account` " +
-                        "FOREIGN KEY (`id_account`) " +
-                        "REFERENCES `account` (`id_account`)," +
+                        "FOREIGN KEY (`email`) " +
+                        "REFERENCES `account` (`email`)," +
 
                         "CONSTRAINT `fk-order-deliverer` " +
                         "FOREIGN KEY (`id_deliverer`) " +
-                        "REFERENCES `deliverer` (`id_deliverer`)," +
+                        "REFERENCES `deliverer` (`id_deliverer`))";
 
-                        "CONSTRAINT `fk-order-order_list` " +
-                        "FOREIGN KEY (`id_order_list`) " +
-                        "REFERENCES `order_list` (`id_order_list`) )";
+        String orderProductTable =
+                "CREATE TABLE IF NOT EXISTS `order_product` (" +
+                        "`id_order` int 			NOT NULL AUTO_INCREMENT," +
+                        "`id_product`	int				NOT NULL," +
+
+                        "`quantity`		int		NOT NULL," +
+                        "`total_price`	double 	NOT NULL," +
+
+                        "PRIMARY KEY (`id_order`, `id_product`)," +
+
+                        "CONSTRAINT `fk-order_product-order` " +
+                        "FOREIGN KEY (`id_order`) " +
+                        "REFERENCES `order` (`id_order`)," +
+
+                        "CONSTRAINT `fk-order_product-product`  " +
+                        "FOREIGN KEY (`id_product`)  " +
+                        "REFERENCES `product` (`id_product`))";
 
         Connection dataBaseConnection = SqlConfig.getDataBaseConnection();
 
@@ -137,16 +137,16 @@ public class setupDB {
 
         try {
             Statement statement = dataBaseConnection.createStatement();
-            statement.execute(orderListTable);
-            logger.debug("OrderList table successfully created");
+            statement.execute(orderTable);
+            logger.debug("Order table successfully created");
         } catch (SQLException exception) {
             logger.error(exception.getMessage());
         }
 
         try {
             Statement statement = dataBaseConnection.createStatement();
-            statement.execute(orderTable);
-            logger.debug("Order table successfully created");
+            statement.execute(orderProductTable);
+            logger.debug("OrderList table successfully created");
         } catch (SQLException exception) {
             logger.error(exception.getMessage());
         }

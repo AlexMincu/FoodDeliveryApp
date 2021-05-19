@@ -79,6 +79,9 @@ public class Restaurant {
         this.score = score;
     }
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     @Override
     public String toString() {

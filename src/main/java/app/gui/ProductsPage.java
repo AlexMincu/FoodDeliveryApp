@@ -81,7 +81,7 @@ public class ProductsPage extends JFrame{
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 logger.info("Closing app");
-                service.exportAll();
+//                service.exportAll();
                 dispose();
                 System.exit(0);
             }
