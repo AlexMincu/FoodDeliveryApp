@@ -5,8 +5,6 @@ import app.service.Service;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class CartProductPane extends JPanel{
 
@@ -73,20 +71,14 @@ public class CartProductPane extends JPanel{
 
 
 
-        removeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                service.removeFromCart(product);
-                updateQuantityLabel(product);
-            }
+        removeButton.addActionListener(e -> {
+            service.removeFromCart(product);
+            updateQuantityLabel(product);
         });
 
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                service.addToCart(product);
-                updateQuantityLabel(product);
-            }
+        addButton.addActionListener(e -> {
+            service.addToCart(product);
+            updateQuantityLabel(product);
         });
     }
 

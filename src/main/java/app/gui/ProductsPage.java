@@ -1,14 +1,11 @@
 package app.gui;
 
 import app.model.Restaurant;
-import app.service.BaseService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -58,20 +55,14 @@ public class ProductsPage extends JFrame{
         validate();
 
 
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new RestaurantsPage();
-                dispose();
-            }
+        backButton.addActionListener(e -> {
+            new RestaurantsPage();
+            dispose();
         });
 
-        cartButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new CartPage(restaurant);
-                dispose();
-            }
+        cartButton.addActionListener(e -> {
+            new CartPage(restaurant);
+            dispose();
         });
 
 

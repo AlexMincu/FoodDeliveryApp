@@ -12,7 +12,7 @@ public class BaseService {
     protected Map<Integer, Deliverer> deliverers;
     protected List<OrderProduct> cart;
 
-    private Logger logger = LogManager.getLogger(BaseService.class);
+    private final Logger logger = LogManager.getLogger(BaseService.class);
 
     protected BaseService() {
         this.currentAccount = null;

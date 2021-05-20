@@ -9,11 +9,11 @@ import java.sql.SQLException;
 
 public class SqlConfig {
     private static Connection connection;
-    private static String URL = "jdbc:mysql://localhost:3306/deliverydb";
-    private static String USER = "root";
-    private static String PASSWORD = "password";
+    private static final String URL = "jdbc:mysql://localhost:3306/";
+    private static final String USER = "root";
+    private static final String PASSWORD = "password";
 
-    private static Logger logger = LogManager.getLogger(SqlConfig.class);
+    private static final Logger logger = LogManager.getLogger(SqlConfig.class);
 
     private SqlConfig() {
     }

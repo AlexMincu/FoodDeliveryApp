@@ -7,8 +7,6 @@ import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -63,53 +61,38 @@ public class CartPage extends JFrame{
 
         updatePrices(restaurant);
 
-        addressComboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == addressComboBox) {
-                    if(addressComboBox.getSelectedIndex() == 0) {
-                        newAddressField.setEnabled(false);
-                        newAddressField.setText(service.getCurrentAccount().getAddress());
-                    }
-                    else if(addressComboBox.getSelectedIndex() == 1) {
-                        newAddressField.setEnabled(true);
-                        newAddressField.setText("");
-                    }
+        addressComboBox.addActionListener(e -> {
+            if(e.getSource() == addressComboBox) {
+                if(addressComboBox.getSelectedIndex() == 0) {
+                    newAddressField.setEnabled(false);
+                    newAddressField.setText(service.getCurrentAccount().getAddress());
+                }
+                else if(addressComboBox.getSelectedIndex() == 1) {
+                    newAddressField.setEnabled(true);
+                    newAddressField.setText("");
                 }
             }
         });
 
-        paymentComboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        paymentComboBox.addActionListener(e -> {
 
-            }
         });
 
-        refreshButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new CartPage(restaurant);
-                dispose();
-            }
+        refreshButton.addActionListener(e -> {
+            new CartPage(restaurant);
+            dispose();
         });
 
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ProductsPage(restaurant);
-                dispose();
-            }
+        backButton.addActionListener(e -> {
+            new ProductsPage(restaurant);
+            dispose();
         });
 
-        confirmButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                service.createOrder(newAddressField.getText());
+        confirmButton.addActionListener(e -> {
+            service.createOrder(newAddressField.getText());
 
-                new RestaurantsPage();
-                dispose();
-            }
+            new RestaurantsPage();
+            dispose();
         });
 
 

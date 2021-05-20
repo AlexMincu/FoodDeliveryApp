@@ -12,14 +12,14 @@ import java.util.Map;
 
 public class DatabaseService extends BaseService{
     private static DatabaseService single_instance = new DatabaseService();
-    private Logger logger = LogManager.getLogger(DatabaseService.class);
+    private final Logger logger = LogManager.getLogger(DatabaseService.class);
 
-    private AccountRepository accRep = AccountRepository.getInstance();
-    private DelivererRepository delRep = DelivererRepository.getInstance();
-    private RestaurantRepository restRep = RestaurantRepository.getInstance();
-    private ProductRepository prodRep = ProductRepository.getInstance();
-    private OrderRepository ordRep = OrderRepository.getInstance();
-    private OrderProductRepository ordProdRep = OrderProductRepository.getInstance();
+    private final AccountRepository accRep = AccountRepository.getInstance();
+    private final DelivererRepository delRep = DelivererRepository.getInstance();
+    private final RestaurantRepository restRep = RestaurantRepository.getInstance();
+    private final ProductRepository prodRep = ProductRepository.getInstance();
+    private final OrderRepository ordRep = OrderRepository.getInstance();
+    private final OrderProductRepository ordProdRep = OrderProductRepository.getInstance();
 
     protected DatabaseService() {
         super();
@@ -33,9 +33,14 @@ public class DatabaseService extends BaseService{
 
 
     // Database
-    public void connectDB() {
+    public void createDB() {
         setupDB.initDB();
     }
+
+    public void deleteDB() {
+        setupDB.dropDB();
+    }
+
     public void importFromDB() {
         logger.info("Importing fields from DB");
 

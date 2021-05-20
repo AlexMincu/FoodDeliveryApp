@@ -6,8 +6,6 @@ import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -45,40 +43,28 @@ public class RegisterPage extends JFrame{
         Logger logger = LogManager.getLogger(RegisterPage.class);
         logger.info("Initiated page");
 
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == registerButton) {
-                    // Convert char[] to String
-                    String pass = "";
-                    for (var c : passwordField.getPassword())
-                        pass = pass.concat(String.valueOf(c));
+        registerButton.addActionListener(e -> {
+            if(e.getSource() == registerButton) {
+                // Convert char[] to String
+                String pass = "";
+                for (var c : passwordField.getPassword())
+                    pass = pass.concat(String.valueOf(c));
 
-                    // Create account
-                    String conditions = service.register(emailField.getText(),
-                            nameField.getText(),
-                            surnameField.getText(),
-                            phoneField.getText(),
-                            pass,
-                            "");
+                if (service.register(
+                        emailField.getText(), nameField.getText(), surnameField.getText(), phoneField.getText(), pass, "")) {
 
-                    if (conditions.equals("11111")) {
-                        registerMessageLabel.setText("Account created successfully");
-                        registerMessageLabel.setForeground(Color.green);
-                    } else {
-                        registerMessageLabel.setText("Account cannot be created");
-                        registerMessageLabel.setForeground(Color.red);
-                    }
+                    registerMessageLabel.setText("Account created successfully");
+                    registerMessageLabel.setForeground(Color.green);
+                } else {
+                    registerMessageLabel.setText("Account cannot be created");
+                    registerMessageLabel.setForeground(Color.red);
                 }
             }
         });
 
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new LoginPage();
-                dispose();
-            }
+        backButton.addActionListener(e -> {
+            new LoginPage();
+            dispose();
         });
 
 

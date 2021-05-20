@@ -1,5 +1,6 @@
 package app.service;
 
+import app.config.setupDB;
 import app.gui.LoginPage;
 import app.gui.RestaurantsPage;
 import app.model.*;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 
 public class Service extends DatabaseService {
     private static Service single_instance = null;
-    private Logger logger = LogManager.getLogger(Service.class);
+    private final Logger logger = LogManager.getLogger(Service.class);
 
     private Service() {
         super();
@@ -24,10 +25,25 @@ public class Service extends DatabaseService {
     }
 
     // GUI and other useful methods
+    public void firstStartApp() {
+        logger.info("Application is starting");
+
+        setupDB.dropDB();
+        setupDB.initDB();
+        setupDB.addDummyData2DB();
+        importFromDB();
+
+        if (currentAccount == null) {
+            new LoginPage();
+        } else {
+            new RestaurantsPage();
+        }
+    }
+
     public void startApp() {
         logger.info("Application is starting");
 
-        connectDB();
+        setupDB.initDB();
         importFromDB();
 
         if (currentAccount == null) {
@@ -54,41 +70,16 @@ public class Service extends DatabaseService {
         }
     }
 
-    public String register(String email, String name, String surname, String phoneNo, String password, String address) {
+    public boolean register(String email, String name, String surname, String phoneNo, String password, String address) {
         logger.debug("Trying to register an account using the email: " + email);
-        char[] checks = new char[]{'1', '1', '1', '1', '1'};
-        /*
-            Returns:
-                    0    - if the field is wrong
-                    1    - if the field is correct
-                "11111"  - account successfully created
-         */
 
-
-        // NOT FUNCTIONAL YET
-//        if(email.matches("[^a-zA-Z0-9_@.]"))
-//            checks[0] = '0';
-//
-//        if(name.matches("[^a-zA-Z ]+"))
-//            checks[1] = '0';
-//
-//        if(surname.matches("[^a-zA-Z ]+"))
-//            checks[2] = '0';
-//
-//        if(phoneNo.matches("[^0-9]+"))
-//            checks[3] = '0';
-//
-//        if(password.matches("[^a-zA-Z0-9]+"))
-//            checks[4] = '0';
-
-
-        String check = new String(checks);
-        if (check.equals("11111") && accounts.get(email) == null) {
+        if (accounts.get(email) == null) {
             accounts.put(email, new Account(email, password, name, surname, phoneNo, address));
-        } else
-            System.out.println("Email already taken");
-
-        return check;
+            return true;
+        } else {
+            logger.warn("Email already taken");
+            return false;
+        }
     }
 
 

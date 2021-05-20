@@ -1,7 +1,6 @@
 package app.repository;
 
 import app.config.SqlConfig;
-import app.model.Account;
 import app.model.OrderProduct;
 
 import java.sql.*;

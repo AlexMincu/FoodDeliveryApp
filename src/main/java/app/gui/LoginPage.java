@@ -6,8 +6,6 @@ import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -38,31 +36,25 @@ public class LoginPage extends JFrame{
         logger.info("Initiated page");
 
 
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == loginButton) {
-                    // convert password to String
-                    String pass = "";
-                    for(var c : passwordField.getPassword())
-                        pass = pass.concat(String.valueOf(c));
+        loginButton.addActionListener(e -> {
+            if(e.getSource() == loginButton) {
+                // convert password to String
+                String pass = "";
+                for(var c : passwordField.getPassword())
+                    pass = pass.concat(String.valueOf(c));
 
-                    // login action
-                    if(service.login(emailField.getText(), pass)) {
-                        new RestaurantsPage();
-                        dispose();
-                    }
-
+                // login action
+                if(service.login(emailField.getText(), pass)) {
+                    new RestaurantsPage();
+                    dispose();
                 }
+
             }
         });
 
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new RegisterPage();
-                dispose();
-            }
+        registerButton.addActionListener(e -> {
+            new RegisterPage();
+            dispose();
         });
 
 
