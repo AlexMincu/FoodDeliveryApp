@@ -1,0 +1,263 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"background": new java.awt.Color( 255, 255, 255, 255 )
+			addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseEntered", "thisMouseEntered", true ) )
+			addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseExited", "thisMouseExited", true ) )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "exit_button"
+				"text": "x"
+				"foreground": sfield java.awt.Color white
+				"contentAreaFilled": false
+				"borderPainted": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"font": new java.awt.Font( "Segoe UI", 0, 30 )
+				"alignmentY": 0.0f
+				"horizontalAlignment": 2
+				"verticalAlignment": 3
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "exit_buttonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 770
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "back_icon"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/back_icon2.png" )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "back_iconMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"width": 60
+				"height": 60
+				"y": 5
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "title_label"
+				"horizontalAlignment": 0
+				"font": new java.awt.Font( "Segoe UI Semibold", 1, 30 )
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": &Color0 new java.awt.Color( 255, 255, 255, 255 )
+				"text": "Cos de cumparaturi"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 600
+				"height": 75
+				"x": 100
+				"y": 0
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane"
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"opaque": false
+				"enabled": false
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+					"axis": 1
+				} ) {
+					name: "contentPane"
+					"background": sfield java.awt.Color darkGray
+					"opaque": false
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 20
+				"y": 90
+				"width": 410
+				"height": 500
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "delivery_title"
+				"horizontalAlignment": 0
+				"font": new java.awt.Font( "Segoe UI Semibold", 1, 24 )
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": #Color0
+				"text": "Livrare"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 380
+				"height": 50
+				"x": 420
+				"y": 90
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "address_label"
+				"horizontalAlignment": 0
+				"font": &Font0 new java.awt.Font( "Segoe UI Semibold", 1, 18 )
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": #Color0
+				"text": "Adresa de livrare"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 380
+				"height": 35
+				"x": 420
+				"y": 155
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "address_field"
+				"font": new java.awt.Font( "Segoe UI Light", 1, 16 )
+				"foreground": new java.awt.Color( 0, 0, 0, 255 )
+				"background": new java.awt.Color( 255, 255, 255, 255 )
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 445
+				"y": 190
+				"width": 345
+				"height": 40
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "payment_label"
+				"horizontalAlignment": 0
+				"font": #Font0
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": #Color0
+				"text": "Metoda de plata"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 380
+				"height": 35
+				"x": 420
+				"y": 265
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "payment_box"
+				"opaque": false
+				"model": new javax.swing.DefaultComboBoxModel {
+					selectedItem: "Numerar"
+					addElement( "Numerar" )
+					addElement( "Card bancar (indisponibil)" )
+				}
+				"background": new java.awt.Color( 255, 255, 255, 255 )
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 445
+				"y": 300
+				"width": 345
+				"height": 40
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "products_label"
+				"horizontalAlignment": 2
+				"font": &Font1 new java.awt.Font( "Segoe UI Semilight", 1, 14 )
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": #Color0
+				"text": "Produse"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 165
+				"height": 35
+				"x": 455
+				"y": 360
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "delivery_label"
+				"horizontalAlignment": 2
+				"font": new java.awt.Font( "Segoe UI Semilight", 1, 14 )
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": #Color0
+				"text": "Livrare"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 165
+				"height": 35
+				"x": 455
+				"y": 395
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "total_label"
+				"horizontalAlignment": 2
+				"font": new java.awt.Font( "Segoe UI Semilight", 1, 14 )
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": #Color0
+				"text": "Total"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 165
+				"height": 35
+				"x": 455
+				"y": 430
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "products_value_label"
+				"horizontalAlignment": 4
+				"font": #Font1
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": #Color0
+				"text": "0.0 RON"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 160
+				"height": 35
+				"x": 620
+				"y": 360
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "delivery_value_label"
+				"horizontalAlignment": 4
+				"font": #Font1
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": #Color0
+				"text": "0.0 RON"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 160
+				"height": 35
+				"x": 620
+				"y": 395
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "total_value_label"
+				"horizontalAlignment": 4
+				"font": #Font1
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": #Color0
+				"text": "0.0 RON"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 160
+				"height": 35
+				"x": 620
+				"y": 430
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "payment_bg"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/back_blur.png" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 450
+				"y": 350
+				"width": 340
+				"height": 125
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "confirm_button"
+				"text": "Confirma comanda"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/white_button3.png" )
+				"opaque": false
+				"horizontalTextPosition": 0
+				"contentAreaFilled": false
+				"borderPainted": false
+				"font": new java.awt.Font( "Segoe UI Semibold", 1, 14 )
+				"foreground": new java.awt.Color( 0, 0, 0, 255 )
+				"pressedIcon": new com.jformdesigner.model.SwingIcon( 0, "/white_button3_pressed.png" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "confirm_buttonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 510
+				"y": 500
+				"width": 215
+				"height": 60
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "bg_label"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/cart_page_bg.jpeg" )
+				"verticalAlignment": 1
+				"horizontalAlignment": 2
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 0
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 800, 600 )
+		} )
+	}
+}

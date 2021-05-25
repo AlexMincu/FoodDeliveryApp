@@ -33,7 +33,7 @@ public class SqlConfig {
 
     public static void closeDataBaseConnection() {
         try {
-            if( connection != null && !connection.isClosed()) {
+            if (connection != null && !connection.isClosed()) {
                 connection.close();
                 logger.info("Successfully closed connection with DB");
             }

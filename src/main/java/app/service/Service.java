@@ -1,8 +1,8 @@
 package app.service;
 
 import app.config.setupDB;
-import app.gui.LoginPage;
-import app.gui.RestaurantsPage;
+import app.gui.AppFrame;
+
 import app.model.*;
 import app.repository.OrderProductRepository;
 import org.apache.logging.log4j.LogManager;
@@ -32,12 +32,6 @@ public class Service extends DatabaseService {
         setupDB.initDB();
         setupDB.addDummyData2DB();
         importFromDB();
-
-        if (currentAccount == null) {
-            new LoginPage();
-        } else {
-            new RestaurantsPage();
-        }
     }
 
     public void startApp() {
@@ -45,12 +39,6 @@ public class Service extends DatabaseService {
 
         setupDB.initDB();
         importFromDB();
-
-        if (currentAccount == null) {
-            new LoginPage();
-        } else {
-            new RestaurantsPage();
-        }
     }
 
 
@@ -58,23 +46,26 @@ public class Service extends DatabaseService {
     public Boolean login(String email, String password) {
         logger.debug("Logging in using the email: " + email);
 
-        if(accounts == null)
+        if (accounts == null) {
             logger.warn("There are no accounts imported");
+            return false;
+        }
 
-        if (accounts.get(email).getPassword().equals(password)) {
+
+        if (accounts.containsKey(email) && accounts.get(email).getPassword().equals(password)) {
             currentAccount = accounts.get(email);
             return true;
         } else {
-            System.out.println("Wrong credentials");
+            logger.warn("Wrong credentials");
             return false;
         }
     }
 
-    public boolean register(String email, String name, String surname, String phoneNo, String password, String address) {
+    public boolean register(String email, String password, String name, String surname, String phoneNo) {
         logger.debug("Trying to register an account using the email: " + email);
 
         if (accounts.get(email) == null) {
-            accounts.put(email, new Account(email, password, name, surname, phoneNo, address));
+            accounts.put(email, new Account(email, password, name, surname, phoneNo));
             return true;
         } else {
             logger.warn("Email already taken");
@@ -114,11 +105,25 @@ public class Service extends DatabaseService {
             }
     }
 
+    public int getCartSize() {
+        int size = 0;
+
+        for (var p : cart) {
+            size += p.getQuantity();
+        }
+
+        return size;
+    }
+
     public void flushCart() {
         if (!cart.isEmpty()) {
             logger.debug("Flushing cart");
             cart.clear();
         }
+    }
+
+    public boolean isCartEmpty() {
+        return cart.isEmpty();
     }
 
 
@@ -146,23 +151,26 @@ public class Service extends DatabaseService {
      * A simple function to search the first deliverer available
      */
     private void findAvailableDeliverer(Order order) {
-        for(var id_deliverer : deliverers.keySet()) {
-            if(!deliverers.get(id_deliverer).isBusy()) {
+        for (var id_deliverer : deliverers.keySet()) {
+            if (!deliverers.get(id_deliverer).isBusy()) {
                 order.setDeliverer(deliverers.get(id_deliverer));
                 break;
             }
         }
 
-        if(order.getDeliverer() == null) {
+        if (order.getDeliverer() == null) {
             logger.warn("No deliverer available for order with id '" + order.getId_order() + "'");
-        }
-        else {
+        } else {
             logger.debug("Deliverer '" + order.getDeliverer().getFullName() +
                     "' will deliver the order with id '" + order.getId_order() + "'");
             order.getDeliverer().setBusy(true);
         }
     }
 
+    public int getSelected_restaurant_id() {
+        AppFrame app = AppFrame.getInstance();
+        return app.getSelected_restaurant_id();
+    }
 
 }
 

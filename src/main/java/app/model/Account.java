@@ -7,17 +7,15 @@ public class Account {
     private String name;
     private String surname;
     private String phoneNo;
-    private String address;
 
 
-    public Account(String email, String password, String name, String surname, String phoneNo, String address) {
+    public Account(String email, String password, String name, String surname, String phoneNo) {
         this.email = email;
         this.password = password;
 
         this.name = name;
         this.surname = surname;
         this.phoneNo = phoneNo;
-        this.address = address;
     }
 
 
@@ -41,10 +39,6 @@ public class Account {
         return phoneNo;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
 
     public void setEmail(String email) {
         this.email = email;
@@ -66,14 +60,10 @@ public class Account {
         this.phoneNo = phoneNo;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
 
     @Override
     public String toString() {
-        return  "        Account information:        \n" +
+        return "        Account information:        \n" +
                 "------------------------------------\n" +
                 "Email: " + email + "\n" +
                 "Name: " + name + "\n" +

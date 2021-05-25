@@ -9,7 +9,10 @@ import java.util.Map;
 
 public class RestaurantRepository {
     private static RestaurantRepository single_instance = null;
-    private RestaurantRepository() {}
+
+    private RestaurantRepository() {
+    }
+
     public static RestaurantRepository getInstance() {
         if (single_instance == null)
             single_instance = new RestaurantRepository();

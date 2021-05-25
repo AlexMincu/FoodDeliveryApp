@@ -71,7 +71,7 @@ public class Deliverer {
 
     @Override
     public String toString() {
-        return  "        Deliverer information:        \n" +
+        return "        Deliverer information:        \n" +
                 "Name: " + name + "\n" +
                 "Surname: " + surname + "\n" +
                 "Phone Number: " + phoneNo + "\n" +

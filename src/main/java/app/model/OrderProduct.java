@@ -40,7 +40,7 @@ public class OrderProduct {
 
     @Override
     public String toString() {
-        return  "Name: " + product.getName() + "\n" +
+        return "Name: " + product.getName() + "\n" +
                 "Price: " + product.getPrice() + " * " + quantity + " = " + price + "\n";
     }
 

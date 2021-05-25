@@ -25,7 +25,6 @@ public class setupDB {
                         "`name`			varchar(50) 	NOT NULL," +
                         "`surname`		varchar(50) 	NOT NULL," +
                         "`phoneNo`		varchar(15)		NOT NULL," +
-                        "`address`		varchar(100)	NOT NULL," +
 
                         "PRIMARY KEY (`email`)" +
                         ")";
@@ -202,11 +201,11 @@ public class setupDB {
      */
     public static void addDummyData2DB() {
         String dummyDataAccounts =
-                "INSERT INTO `account` (email, password, name, surname, phoneNo, address) " +
-                        "VALUES  ('admin', 'admin', 'NumeAdmin', 'PrenumeAdmin', '0721234567', 'adresaAdmin'), " +
-                        "('fabian_codrin@gmail.com', 'parola123', 'Fabian', 'Codrin', '0724589653', 'BD. BRĂTIANU I. C. nr. 34, BUCHAREST - DISTRICT 3, 30175'), " +
-                        "('lazar_marcel@gmail.com', 'parola123', 'Lazar', 'Marcel', '0735698425', 'CAL. GIULEŞTI nr. 6-8, BUCHAREST - DISTRICT 6, 060274'), " +
-                        "('roxana_nicolae@yahoo.com', 'parola123', 'Roxana', 'Nicolae', '0739654812', 'BD. UNIRII nr. 25 bl. 14 sc. A et 4 ap. 14, BUCHAREST - DISTRICT 5, 040103') ";
+                "INSERT INTO `account` (email, password, name, surname, phoneNo) " +
+                        "VALUES  ('admin', 'admin', 'NumeAdmin', 'PrenumeAdmin', '0721234567'), " +
+                        "('fabian_codrin@gmail.com', 'parola123', 'Fabian', 'Codrin', '0724589653'), " +
+                        "('lazar_marcel@gmail.com', 'parola123', 'Lazar', 'Marcel', '0735698425'), " +
+                        "('roxana_nicolae@yahoo.com', 'parola123', 'Roxana', 'Nicolae', '0739654812') ";
 
         String dummyDataDeliverers =
                 "INSERT INTO `deliverer` (name, surname, phoneNo, vehicle, busy) " +

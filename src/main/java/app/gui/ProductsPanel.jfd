@@ -1,0 +1,80 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"background": new java.awt.Color( 255, 255, 255, 255 )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "exit_button"
+				"text": "x"
+				"foreground": sfield java.awt.Color black
+				"contentAreaFilled": false
+				"borderPainted": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"font": new java.awt.Font( "Segoe UI", 0, 30 )
+				"alignmentY": 0.0f
+				"horizontalAlignment": 2
+				"verticalAlignment": 3
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "exit_buttonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 770
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "back_icon"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/back_icon.png" )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "back_iconMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"width": 60
+				"height": 60
+				"y": 5
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "title_label"
+				"horizontalAlignment": 2
+				"font": new java.awt.Font( "Segoe UI Semibold", 1, 30 )
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": new java.awt.Color( 60, 0, 200, 255 )
+				"text": "Restaurant"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 600
+				"height": 75
+				"x": 100
+				"y": 0
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane"
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": new java.awt.Color( 255, 255, 255, 255 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+					"axis": 1
+				} ) {
+					name: "contentPane"
+					"background": new java.awt.Color( 255, 255, 255, 255 )
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 25
+				"y": 75
+				"width": 610
+				"height": 500
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "cart_icon"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/cart_icon.png" )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "cart_iconMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 650
+				"y": 250
+				"width": 100
+				"height": 100
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 800, 600 )
+		} )
+	}
+}

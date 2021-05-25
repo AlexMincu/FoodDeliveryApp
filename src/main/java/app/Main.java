@@ -1,5 +1,6 @@
 package app;
 
+import app.gui.*;
 import app.service.Service;
 
 public class Main {
@@ -8,8 +9,11 @@ public class Main {
         Service service = Service.getInstance();
 
         // After the first boot, start the application with the second function 'startApp()'
-//        service.firstStartApp();
 
+//        service.firstStartApp();
         service.startApp();
+
+
+        AppFrame appFrame = AppFrame.getInstance();
     }
 }

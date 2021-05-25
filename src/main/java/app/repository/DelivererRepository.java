@@ -9,7 +9,10 @@ import java.util.Map;
 
 public class DelivererRepository {
     private static DelivererRepository single_instance = null;
-    private DelivererRepository() {}
+
+    private DelivererRepository() {
+    }
+
     public static DelivererRepository getInstance() {
         if (single_instance == null)
             single_instance = new DelivererRepository();
@@ -48,7 +51,7 @@ public class DelivererRepository {
                     result.getString(2),
                     result.getString(3),
                     result.getString(4),
-                    Deliverer.toVehicle(result.getString(5)) );
+                    Deliverer.toVehicle(result.getString(5)));
         else
             return null;
     }
@@ -79,7 +82,7 @@ public class DelivererRepository {
                     result.getString(2),
                     result.getString(3),
                     result.getString(4),
-                    Deliverer.toVehicle(result.getString(5)) );
+                    Deliverer.toVehicle(result.getString(5)));
 
             deliverers.put(result.getInt(1), currentDeliverer);
         }

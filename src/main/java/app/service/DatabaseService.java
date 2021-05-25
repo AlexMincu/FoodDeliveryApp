@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class DatabaseService extends BaseService{
+public class DatabaseService extends BaseService {
     private static DatabaseService single_instance = new DatabaseService();
     private final Logger logger = LogManager.getLogger(DatabaseService.class);
 
@@ -26,7 +26,7 @@ public class DatabaseService extends BaseService{
     }
 
     public static DatabaseService getInstance() {
-        if(single_instance == null)
+        if (single_instance == null)
             single_instance = new DatabaseService();
         return single_instance;
     }
@@ -54,7 +54,7 @@ public class DatabaseService extends BaseService{
         setDeliverers(getDeliverersFromDB());
 
         logger.debug("Importing products from DB...");
-        for(var id_restaurant : getRestaurants().keySet()) {
+        for (var id_restaurant : getRestaurants().keySet()) {
             getRestaurants().get(id_restaurant).
                     setProducts(getAllProductsByRestaurantIdFromDB(id_restaurant));
         }
@@ -70,7 +70,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Account with email '" + account.getEmail() + "' added to DB");
         else
             logger.warn("Couldn't add account with email '" + account.getEmail() + "' to DB");
@@ -84,13 +84,13 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Account with email '" + email + "' deleted from DB");
         else
             logger.warn("Couldn't delete account with email '" + email + "' from DB");
     }
 
-    public Account getAccountByEmailFromDB(String email){
+    public Account getAccountByEmailFromDB(String email) {
         Account account = null;
 
         try {
@@ -99,7 +99,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(account == null)
+        if (account == null)
             logger.warn("Account with email '" + email + "' doesn't exist inside the DB");
 
         return account;
@@ -126,7 +126,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Password for the account with email '" + email + "'");
         else
             logger.warn("Couldn't update Password for the account with email '" + email + "'");
@@ -141,7 +141,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Name for the account with email '" + email + "'");
         else
             logger.warn("Couldn't update Name for the account with email '" + email + "'");
@@ -156,7 +156,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Surname for the account with email '" + email + "'");
         else
             logger.warn("Couldn't update Surname for the account with email '" + email + "'");
@@ -171,28 +171,11 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated PhoneNo for the account with email '" + email + "'");
         else
             logger.warn("Couldn't update PhoneNo for the account with email '" + email + "'");
     }
-
-    public void updateAccountAddressFromDB(String newAddress, String email) {
-        int rows_affected = 0;
-
-        try {
-            rows_affected = accRep.updateAccountAddress(newAddress, email);
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-        }
-
-        if(rows_affected == 1)
-            logger.info("Updated Address for the account with email '" + email + "'");
-        else
-            logger.warn("Couldn't update Address for the account with email '" + email + "'");
-    }
-
-
 
     // Deliverer DB Functions
     public void addDelivererToDB(Deliverer deliverer) {
@@ -204,7 +187,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Deliverer '" + deliverer.getFullName() + "' added to DB");
         else
             logger.warn("Couldn't add deliverer '" + deliverer.getFullName() + "' to DB");
@@ -219,13 +202,13 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Deliverer '" + getDeliverers().get(id_deliverer).getFullName() + "' deleted from DB");
         else
             logger.warn("Couldn't delete deliverer '" + getDeliverers().get(id_deliverer).getFullName() + "' from DB");
     }
 
-    public Deliverer getDelivererByIdFromDB(int id_deliverer){
+    public Deliverer getDelivererByIdFromDB(int id_deliverer) {
         Deliverer deliverer = null;
 
         try {
@@ -234,7 +217,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(deliverer == null)
+        if (deliverer == null)
             logger.warn("Deliverer with id '" + id_deliverer + "' doesn't exist");
 
         return deliverer;
@@ -261,7 +244,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Name for deliverer with id '" + id_deliverer + "'");
         else
             logger.warn("Couldn't update Name for deliverer with id '" + id_deliverer + "'");
@@ -276,7 +259,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Surname for deliverer with id '" + id_deliverer + "'");
         else
             logger.warn("Couldn't update Surname for deliverer with id '" + id_deliverer + "'");
@@ -291,7 +274,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Phone Number for deliverer with id '" + id_deliverer + "'");
         else
             logger.warn("Couldn't update Phone Number for deliverer with id '" + id_deliverer + "'");
@@ -306,12 +289,11 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Vehicle for deliverer with id '" + id_deliverer + "'");
         else
             logger.warn("Couldn't update Vehicle for deliverer with id '" + id_deliverer + "'");
     }
-
 
 
     // Restaurant DB Functions
@@ -324,7 +306,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Restaurant '" + restaurant.getName() + "' added to DB");
         else
             logger.warn("Couldn't add restaurant '" + restaurant.getName() + "' to DB");
@@ -339,13 +321,13 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Restaurant '" + getRestaurants().get(id_restaurant).getName() + "' deleted");
         else
             logger.warn("Couldn't delete restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
     }
 
-    public Restaurant getRestaurantByIdFromDB(int id_restaurant){
+    public Restaurant getRestaurantByIdFromDB(int id_restaurant) {
         Restaurant restaurant = null;
 
         try {
@@ -354,7 +336,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(restaurant == null)
+        if (restaurant == null)
             logger.warn("Restaurant '" + getRestaurants().get(id_restaurant).getName() + "' doesn't exist");
 
         return restaurant;
@@ -369,7 +351,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(restaurants == null)
+        if (restaurants == null)
             logger.warn("DB Restaurants table is empty");
 
         return restaurants;
@@ -384,7 +366,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Name for restaurant with id '" + id_restaurant + "'");
         else
             logger.warn("Couldn't update Name for restaurant with id '" + id_restaurant + "'");
@@ -399,7 +381,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Address for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
         else
             logger.warn("Couldn't update Address for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
@@ -414,7 +396,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Description for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
         else
             logger.warn("Couldn't update Description for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
@@ -429,7 +411,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Delivery Price for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
         else
             logger.warn("Couldn't update Delivery Price for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
@@ -444,7 +426,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Score for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
         else
             logger.warn("Couldn't update Score for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
@@ -459,12 +441,11 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Delivery Time for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
         else
             logger.warn("Couldn't update Delivery Time for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
     }
-
 
 
     // Product DB Functions
@@ -477,7 +458,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Product '" + product.getName() + "' added to DB");
         else
             logger.warn("Couldn't add product '" + product.getName() + "' to DB");
@@ -492,13 +473,13 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Product with id '" + id_product + "' deleted");
         else
             logger.warn("Couldn't delete product with id '" + id_product + "'");
     }
 
-    public Product getProductByIdFromDB(int id_product){
+    public Product getProductByIdFromDB(int id_product) {
         Product product = null;
 
         try {
@@ -507,7 +488,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(product == null)
+        if (product == null)
             logger.warn("Product with id '" + id_product + "' doesn't exist");
 
         return product;
@@ -522,7 +503,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(products == null)
+        if (products == null)
             logger.warn("There are no products inside DB for restaurant '" + getRestaurants().get(id_restaurant).getName() + "'");
 
         return products;
@@ -537,7 +518,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Name for the product with id '" + id_product + "'");
         else
             logger.warn("Couldn't update Name for the product with id '" + id_product + "'");
@@ -552,7 +533,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Price for the product with id '" + id_product + "'");
         else
             logger.warn("Couldn't update Price for the product with id '" + id_product + "'");
@@ -567,12 +548,11 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Description for the product with id '" + id_product + "'");
         else
             logger.warn("Couldn't update Description for the product with id '" + id_product + "'");
     }
-
 
 
     // Order DB Functions
@@ -585,13 +565,13 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("New order for email '" + order.getEmail() + "' added to DB");
         else
             logger.warn("Couldn't add new order for email '" + order.getEmail() + "' to DB");
     }
 
-    public int getLastOrderIdFromDB(){
+    public int getLastOrderIdFromDB() {
         int id = -1;
 
         try {
@@ -600,7 +580,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(id == -1)
+        if (id == -1)
             logger.warn("Database order table is empty");
 
         return id;
@@ -615,7 +595,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Order with id '" + id_order + "' deleted from DB");
         else
             logger.warn("Couldn't delete order with id '" + id_order + "' from DB");
@@ -630,7 +610,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Status for order with id '" + id_order + "'");
         else
             logger.warn("Couldn't update Status for order with id '" + id_order + "'");
@@ -645,12 +625,11 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Deliverer for order with id '" + id_order + "'");
         else
             logger.warn("Couldn't update Deliverer for order with id '" + id_order + "'");
     }
-
 
 
     // OrderProduct DB Functions
@@ -663,7 +642,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Product '" + orderProduct.getProduct().getName() + "' added to DB list " +
                     "for order with id '" + id_order + "'");
         else
@@ -680,7 +659,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Product with id '" + id_product + "' deleted from DB list " +
                     "of order with id '" + id_order + "'");
         else
@@ -697,7 +676,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Quantity for product with id '" + id_product + "' from DB list " +
                     "of order with id '" + id_order + "'");
         else
@@ -714,7 +693,7 @@ public class DatabaseService extends BaseService{
             logger.error(e.getMessage());
         }
 
-        if(rows_affected == 1)
+        if (rows_affected == 1)
             logger.info("Updated Price for product with id '" + id_product + "' from DB list " +
                     "of order with id '" + id_order + "'");
         else

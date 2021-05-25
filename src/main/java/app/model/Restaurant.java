@@ -85,7 +85,7 @@ public class Restaurant {
 
     @Override
     public String toString() {
-        return  "        Restaurant information:        \n" +
+        return "        Restaurant information:        \n" +
                 "Name: " + name + "\n" +
                 "Address: " + address + "\n" +
                 "Description: " + description + "\n" +

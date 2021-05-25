@@ -19,7 +19,7 @@ public class Order {
         this.address = address;
         this.order_list = order_list;
         double sum = 0;
-        for(var listed_product : order_list)
+        for (var listed_product : order_list)
             sum += listed_product.getPrice();
 
         this.price = sum;
@@ -88,16 +88,16 @@ public class Order {
     public String toString() {
         String string =
                 "        Order information:        \n" +
-                "----------------------------------\n" +
-                "Order ID: " + id_order + "\n" +
-                "Email: " + email + "\n" +
-                "Address: " + address + "\n" +
-                "Price: " + price + "\n" +
-                "Status: " + status + "\n" +
-                "Deliverer: " + deliverer + "\n" +
-                "Products: \n";
+                        "----------------------------------\n" +
+                        "Order ID: " + id_order + "\n" +
+                        "Email: " + email + "\n" +
+                        "Address: " + address + "\n" +
+                        "Price: " + price + "\n" +
+                        "Status: " + status + "\n" +
+                        "Deliverer: " + deliverer + "\n" +
+                        "Products: \n";
 
-        for(var product : order_list)
+        for (var product : order_list)
             string = string.concat(product.toString() + "\n");
 
         string = string.concat("----------------------------------\n");

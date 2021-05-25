@@ -7,7 +7,10 @@ import java.sql.*;
 
 public class OrderRepository {
     private static OrderRepository single_instance = null;
-    private OrderRepository() {}
+
+    private OrderRepository() {
+    }
+
     public static OrderRepository getInstance() {
         if (single_instance == null)
             single_instance = new OrderRepository();

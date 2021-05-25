@@ -1,0 +1,182 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "exit_button"
+				"text": "x"
+				"foreground": sfield java.awt.Color blue
+				"contentAreaFilled": false
+				"borderPainted": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"font": new java.awt.Font( "Segoe UI", 0, 30 )
+				"alignmentY": 0.0f
+				"horizontalAlignment": 2
+				"verticalAlignment": 3
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "exit_buttonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"height": 30
+				"x": 770
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "icon_label"
+				"horizontalAlignment": 0
+				"font": new java.awt.Font( "Segoe UI Semibold", 1, 40 )
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": &Color0 new java.awt.Color( 255, 255, 255, 255 )
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/champions_icon_medium.png" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 210
+				"height": 175
+				"x": 0
+				"y": 0
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "login_label"
+				"horizontalAlignment": 0
+				"font": new java.awt.Font( "Segoe UI Semibold", 1, 30 )
+				"opaque": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": #Color0
+				"text": "Conectare"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 210
+				"height": 55
+				"x": 0
+				"y": 175
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "email_icon"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/email_icon.png" )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 250
+				"y": 190
+				"width": 50
+				"height": 50
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "email_field"
+				"text": "E-mail"
+				"background": &Color1 new java.awt.Color( 255, 255, 255, 255 )
+				"border": &EtchedBorder0 new javax.swing.border.EtchedBorder( 1, null, null )
+				"font": &Font0 new java.awt.Font( "Segoe UI", 0, 18 )
+				"foreground": new java.awt.Color( 153, 153, 153, 255 )
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "email_fieldFocusGained", true ) )
+				addEvent( new FormEvent( "java.awt.event.KeyListener", "keyReleased", "email_fieldKeyReleased", true ) )
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "email_fieldFocusLost", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 300
+				"y": 200
+				"width": 300
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "password_icon"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/password_icon.png" )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 50
+				"height": 50
+				"x": 250
+				"y": 240
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "password_field"
+				"text": "Parola"
+				"background": #Color1
+				"border": #EtchedBorder0
+				"font": #Font0
+				"foreground": new java.awt.Color( 153, 153, 153, 255 )
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "password_fieldFocusGained", true ) )
+				addEvent( new FormEvent( "java.awt.event.KeyListener", "keyReleased", "password_fieldKeyReleased", true ) )
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "password_fieldFocusLost", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 300
+				"height": 33
+				"x": 300
+				"y": 250
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "login_button"
+				"text": "Conectare"
+				"horizontalTextPosition": 0
+				"iconTextGap": 0
+				"opaque": false
+				"font": &Font1 new java.awt.Font( "Segoe UI Semibold", 1, 18 )
+				"contentAreaFilled": false
+				"borderPainted": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"pressedIcon": &SwingIcon0 new com.jformdesigner.model.SwingIcon( 0, "/blue_button_pressed.png" )
+				"horizontalAlignment": 2
+				"verticalAlignment": 1
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/blue_button.png" )
+				"foreground": new java.awt.Color( 255, 255, 255, 255 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "login_buttonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 400
+				"y": 300
+				"width": 200
+				"height": 50
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "register_description_label"
+				"text": "Nu ai cont?"
+				"font": new java.awt.Font( "Segoe UI Semibold", 0, 12 )
+				"foreground": new java.awt.Color( 102, 102, 102, 255 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 100
+				"height": 16
+				"x": 580
+				"y": 525
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "register_button"
+				"text": "Inregistrare"
+				"horizontalTextPosition": 0
+				"iconTextGap": 0
+				"opaque": false
+				"font": #Font1
+				"contentAreaFilled": false
+				"borderPainted": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"pressedIcon": #SwingIcon0
+				"foreground": new java.awt.Color( 0, 0, 204, 255 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "register_buttonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 200
+				"height": 50
+				"y": 530
+				"x": 580
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "error_label"
+				"horizontalAlignment": 0
+				"foreground": new java.awt.Color( 255, 0, 0, 255 )
+				"font": new java.awt.Font( "Segoe UI Semibold", 2, 14 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 200
+				"y": 400
+				"width": 400
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "bg_label"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/login_page_bg.jpeg" )
+				"verticalAlignment": 1
+				"horizontalAlignment": 2
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 800
+				"height": 600
+				"x": 0
+				"y": 0
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 800, 600 )
+		} )
+	}
+}

@@ -9,7 +9,10 @@ import java.util.Map;
 
 public class AccountRepository {
     private static AccountRepository single_instance = null;
-    private AccountRepository() {}
+
+    private AccountRepository() {
+    }
+
     public static AccountRepository getInstance() {
         if (single_instance == null)
             single_instance = new AccountRepository();
@@ -19,8 +22,8 @@ public class AccountRepository {
 
 
     public int insertAccount(Account account) throws SQLException {
-        String insert = "INSERT INTO `account` (email, password, name, surname, phoneNo, address)" +
-                " VALUES (?, ?, ?, ?, ?, ?)";
+        String insert = "INSERT INTO `account` (email, password, name, surname, phoneNo)" +
+                " VALUES (?, ?, ?, ?, ?)";
 
         Connection connection = SqlConfig.getDataBaseConnection();
 
@@ -30,7 +33,6 @@ public class AccountRepository {
         statement.setString(3, account.getName());
         statement.setString(4, account.getSurname());
         statement.setString(5, account.getPhoneNo());
-        statement.setString(6, account.getAddress());
 
         return statement.executeUpdate();
     }
@@ -50,8 +52,7 @@ public class AccountRepository {
                     result.getString(2),
                     result.getString(3),
                     result.getString(4),
-                    result.getString(5),
-                    result.getString(6));
+                    result.getString(5));
         else
             return null;
     }
@@ -83,8 +84,7 @@ public class AccountRepository {
                     result.getString(2),
                     result.getString(3),
                     result.getString(4),
-                    result.getString(5),
-                    result.getString(6));
+                    result.getString(5));
             accounts.put(currentAccount.getEmail(), currentAccount);
         }
 
@@ -138,17 +138,4 @@ public class AccountRepository {
 
         return preparedStatement.executeUpdate();
     }
-
-    public int updateAccountAddress(String newAddress, String email) throws SQLException {
-        String update = "UPDATE account SET address=? WHERE email=?";
-
-        Connection connection = SqlConfig.getDataBaseConnection();
-
-        PreparedStatement preparedStatement = connection.prepareStatement(update);
-        preparedStatement.setString(1, newAddress);
-        preparedStatement.setString(2, email);
-
-        return preparedStatement.executeUpdate();
-    }
-
 }

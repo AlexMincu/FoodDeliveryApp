@@ -9,7 +9,10 @@ import java.util.List;
 
 public class ProductRepository {
     private static ProductRepository single_instance = null;
-    private ProductRepository() {}
+
+    private ProductRepository() {
+    }
+
     public static ProductRepository getInstance() {
         if (single_instance == null)
             single_instance = new ProductRepository();
