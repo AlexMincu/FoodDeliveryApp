@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Sun May 23 22:11:25 EEST 2021
- */
-
 package app.gui;
 
 import java.awt.event.*;
@@ -18,7 +14,7 @@ import javax.swing.*;
 
 public class RestaurantPane extends JPanel {
     private final Logger logger = LogManager.getLogger(RestaurantPane.class);
-    private int id_restaurant;
+    private final int id_restaurant;
 
     public RestaurantPane(int id_restaurant) {
         logger.debug("Creating Restaurant Pane for id '" + id_restaurant + "'");

@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Sun May 23 17:33:50 EEST 2021
- */
-
 package app.gui;
 
 import app.service.Service;
@@ -12,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.regex.Pattern;
 
 
 public class RegisterPanel extends JPanel {
@@ -31,14 +28,78 @@ public class RegisterPanel extends JPanel {
     }
 
     private void register() {
+        boolean email_check = false;
+        boolean password_check = false;
+        boolean name_check = false;
+        boolean surname_check = false;
+        boolean phoneNo_check = false;
+
         String pass = "";
         for (var c : password_field.getPassword())
             pass = pass.concat(String.valueOf(c));
 
+
+        // Email
+        if(email_field.getText().isEmpty()) {
+            email_field.setBackground(Color.pink);
+        }
+        else {
+            email_field.setBackground(Color.white);
+            email_check = true;
+        }
+
+        // Password
+        if(pass.contains(" ") || pass.isEmpty()) {
+            password_field.setBackground(Color.pink);
+        }
+        else {
+            password_field.setBackground(Color.white);
+            password_check = true;
+        }
+
+        // Name
+        if(Pattern.matches("[\\W\\d]+", name_field.getText()) || name_field.getText().isEmpty()) {
+            name_field.setBackground(Color.pink);
+        }
+        else {
+            name_field.setBackground(Color.white);
+            name_check = true;
+        }
+
+        // Surname
+        if(Pattern.matches("[\\W\\d]+", surname_field.getText()) || surname_field.getText().isEmpty()) {
+            surname_field.setBackground(Color.pink);
+        }
+        else {
+            surname_field.setBackground(Color.white);
+            surname_check = true;
+        }
+
+        // PhoneNo
+        if(Pattern.matches("[^\\d]+", phone_field.getText()) ||
+                phone_field.getText().isEmpty() ||
+                phone_field.getText().length() != 10) {
+
+            phone_field.setBackground(Color.pink);
+        }
+        else {
+            phone_field.setBackground(Color.white);
+            phoneNo_check = true;
+        }
+
+
         // register action
-        if (service.register(email_field.getText(), pass, name_field.getText(), surname_field.getText(), phone_field.getText())) {
-            AppFrame app = AppFrame.getInstance();
-            app.openLoginPage();
+        if(email_check && password_check && name_check && surname_check && phoneNo_check) {
+            if (service.register(email_field.getText(), pass, name_field.getText(), surname_field.getText(), phone_field.getText())) {
+                AppFrame app = AppFrame.getInstance();
+                app.openLoginPage();
+            }
+            else {
+                error_label.setText("Emailul este deja folosit");
+            }
+        }
+        else {
+            error_label.setText("Informatii invalide, va rugam sa incercati din nou");
         }
     }
 
@@ -197,21 +258,17 @@ public class RegisterPanel extends JPanel {
         register_button = new JButton();
         login_description_label = new JLabel();
         login_button = new JButton();
+        error_label = new JLabel();
         bg_label = new JLabel();
 
         //======== this ========
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
-                border.EmptyBorder(0, 0, 0, 0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax.swing.border.TitledBorder.CENTER
-                , javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("D\u0069alog", java.awt.Font
-                .BOLD, 12), java.awt.Color.red), getBorder()));
-        addPropertyChangeListener(
-                new java.beans.PropertyChangeListener() {
-                    @Override
-                    public void propertyChange(java.beans.PropertyChangeEvent e) {
-                        if ("\u0062order"
-                                .equals(e.getPropertyName())) throw new RuntimeException();
-                    }
-                });
+        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.
+        swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border
+        .TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog"
+        ,java.awt.Font.BOLD,12),java.awt.Color.red), getBorder
+        ())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java
+        .beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException
+        ();}});
         setLayout(null);
 
         //---- exit_button ----
@@ -265,7 +322,6 @@ public class RegisterPanel extends JPanel {
             public void focusGained(FocusEvent e) {
                 email_fieldFocusGained(e);
             }
-
             @Override
             public void focusLost(FocusEvent e) {
                 email_fieldFocusLost(e);
@@ -297,7 +353,6 @@ public class RegisterPanel extends JPanel {
             public void focusGained(FocusEvent e) {
                 password_fieldFocusGained(e);
             }
-
             @Override
             public void focusLost(FocusEvent e) {
                 password_fieldFocusLost(e);
@@ -329,7 +384,6 @@ public class RegisterPanel extends JPanel {
             public void focusGained(FocusEvent e) {
                 name_fieldFocusGained(e);
             }
-
             @Override
             public void focusLost(FocusEvent e) {
                 name_fieldFocusLost(e);
@@ -361,7 +415,6 @@ public class RegisterPanel extends JPanel {
             public void focusGained(FocusEvent e) {
                 surname_fieldFocusGained(e);
             }
-
             @Override
             public void focusLost(FocusEvent e) {
                 surname_fieldFocusLost(e);
@@ -393,7 +446,6 @@ public class RegisterPanel extends JPanel {
             public void focusGained(FocusEvent e) {
                 phone_fieldFocusGained(e);
             }
-
             @Override
             public void focusLost(FocusEvent e) {
                 phone_fieldFocusLost(e);
@@ -448,6 +500,13 @@ public class RegisterPanel extends JPanel {
         add(login_button);
         login_button.setBounds(580, 530, 200, 50);
 
+        //---- error_label ----
+        error_label.setHorizontalAlignment(SwingConstants.CENTER);
+        error_label.setForeground(Color.red);
+        error_label.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
+        add(error_label);
+        error_label.setBounds(225, 450, 400, 30);
+
         //---- bg_label ----
         bg_label.setIcon(new ImageIcon(getClass().getResource("/login_page_bg.jpeg")));
         bg_label.setVerticalAlignment(SwingConstants.TOP);
@@ -458,7 +517,7 @@ public class RegisterPanel extends JPanel {
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
-            for (int i = 0; i < getComponentCount(); i++) {
+            for(int i = 0; i < getComponentCount(); i++) {
                 Rectangle bounds = getComponent(i).getBounds();
                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -490,6 +549,7 @@ public class RegisterPanel extends JPanel {
     private JButton register_button;
     private JLabel login_description_label;
     private JButton login_button;
+    private JLabel error_label;
     private JLabel bg_label;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

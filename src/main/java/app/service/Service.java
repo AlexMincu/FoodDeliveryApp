@@ -32,6 +32,8 @@ public class Service extends DatabaseService {
         setupDB.initDB();
         setupDB.addDummyData2DB();
         importFromDB();
+
+        AppFrame appFrame = AppFrame.getInstance();
     }
 
     public void startApp() {
@@ -39,6 +41,8 @@ public class Service extends DatabaseService {
 
         setupDB.initDB();
         importFromDB();
+
+        AppFrame appFrame = AppFrame.getInstance();
     }
 
 

@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Sun May 23 17:33:50 EEST 2021
- */
-
 package app.gui;
 
 import app.service.Service;
@@ -38,7 +34,7 @@ public class LoginPanel extends JPanel {
             AppFrame app = AppFrame.getInstance();
             app.openRestaurantsPage();
         } else {
-            error_label.setText("Wrong credentials. Please try again.");
+            error_label.setText("Informatii invalide, va rugam sa incercati din nou");
         }
     }
 
@@ -129,18 +125,11 @@ public class LoginPanel extends JPanel {
         bg_label = new JLabel();
 
         //======== this ========
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder
-                (0, 0, 0, 0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax.swing.border.TitledBorder.CENTER, javax.swing.border
-                .TitledBorder.BOTTOM, new java.awt.Font("Dia\u006cog", java.awt.Font.BOLD, 12), java.awt
-                .Color.red), getBorder()));
-        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            @Override
-            public void
-            propertyChange(java.beans.PropertyChangeEvent e) {
-                if ("bord\u0065r".equals(e.getPropertyName())) throw new RuntimeException()
-                        ;
-            }
-        });
+        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder ( 0
+        , 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM
+        , new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,
+         getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
+        ) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
         setLayout(null);
 
         //---- exit_button ----
@@ -194,7 +183,6 @@ public class LoginPanel extends JPanel {
             public void focusGained(FocusEvent e) {
                 email_fieldFocusGained(e);
             }
-
             @Override
             public void focusLost(FocusEvent e) {
                 email_fieldFocusLost(e);
@@ -226,7 +214,6 @@ public class LoginPanel extends JPanel {
             public void focusGained(FocusEvent e) {
                 password_fieldFocusGained(e);
             }
-
             @Override
             public void focusLost(FocusEvent e) {
                 password_fieldFocusLost(e);
@@ -286,7 +273,7 @@ public class LoginPanel extends JPanel {
         error_label.setForeground(Color.red);
         error_label.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
         add(error_label);
-        error_label.setBounds(200, 400, 400, 30);
+        error_label.setBounds(235, 400, 400, 30);
 
         //---- bg_label ----
         bg_label.setIcon(new ImageIcon(getClass().getResource("/login_page_bg.jpeg")));
@@ -298,7 +285,7 @@ public class LoginPanel extends JPanel {
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
-            for (int i = 0; i < getComponentCount(); i++) {
+            for(int i = 0; i < getComponentCount(); i++) {
                 Rectangle bounds = getComponent(i).getBounds();
                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);

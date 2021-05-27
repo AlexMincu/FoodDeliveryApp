@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Sun May 23 22:11:25 EEST 2021
- */
-
 package app.gui;
 
 import java.awt.event.*;
@@ -18,7 +14,7 @@ import java.io.File;
 
 public class ProductPane extends JPanel {
     private final Logger logger = LogManager.getLogger(ProductPane.class);
-    private Product product;
+    private final Product product;
     private int quantity;
 
     public ProductPane(Product product) {

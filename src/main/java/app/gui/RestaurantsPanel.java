@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Sun May 23 17:33:50 EEST 2021
- */
-
 package app.gui;
 
 import java.awt.event.*;
@@ -14,9 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-/**
- * @author unknown
- */
+
 public class RestaurantsPanel extends JPanel {
     Service service = Service.getInstance();
     private final Logger logger = LogManager.getLogger(RestaurantsPanel.class);

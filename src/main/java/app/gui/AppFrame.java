@@ -1,9 +1,4 @@
-/*
- * Created by JFormDesigner on Sun May 23 17:16:38 EEST 2021
- */
-
 package app.gui;
-
 
 import app.service.Service;
 import org.apache.logging.log4j.LogManager;
@@ -12,9 +7,6 @@ import org.apache.logging.log4j.Logger;
 import java.awt.*;
 import javax.swing.*;
 
-/**
- * @author unknown
- */
 public class AppFrame extends JFrame {
     private static AppFrame single_instance = null;
     private final Logger logger = LogManager.getLogger(AppFrame.class);
@@ -34,8 +26,8 @@ public class AppFrame extends JFrame {
     boolean cart_page_created = false;
     boolean account_page_created = false;
 
-    private JPanel contentPane = new JPanel();
-    private CardLayout layout = new CardLayout();
+    private final JPanel contentPane = new JPanel();
+    private final CardLayout layout = new CardLayout();
 
     private AppFrame() {
         logger.debug("Creating Application Frame");

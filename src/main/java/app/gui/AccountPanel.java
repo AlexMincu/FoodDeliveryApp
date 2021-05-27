@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Sun May 23 17:33:50 EEST 2021
- */
-
 package app.gui;
 
 import app.service.Service;
@@ -12,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.regex.Pattern;
 
 public class AccountPanel extends JPanel {
     Service service = Service.getInstance();
@@ -38,9 +35,15 @@ public class AccountPanel extends JPanel {
     }
 
     private void confirm_buttonActionPerformed(ActionEvent e) {
+        boolean email_check = false;
+        boolean password_check = false;
+        boolean name_check = false;
+        boolean surname_check = false;
+        boolean phoneNo_check = false;
+
         var account = service.getCurrentAccount();
 
-        // If both password fields are equal change password
+
         String pass1 = "";
         for (var c : password_field.getPassword())
             pass1 = pass1.concat(String.valueOf(c));
@@ -48,31 +51,77 @@ public class AccountPanel extends JPanel {
         for (var c : password_field2.getPassword())
             pass2 = pass2.concat(String.valueOf(c));
 
-        if (pass1.equals(pass2) && !pass1.equals(account.getPassword())) {
-            account.setPassword(pass1);
-            service.updateAccountPasswordFromDB(account.getPassword(), account.getEmail());
+        
+        // Check account password
+        if (pass1.contains(" ") ||
+                !pass1.equals(pass2)) {
+
+            password_field.setBackground(Color.pink);
+            password_field2.setBackground(Color.pink);
+        }
+        else {
+            password_field.setBackground(Color.white);
+            password_field2.setBackground(Color.white);
+            password_check = true;
         }
 
-        // Change account name
-        if (!name_field.getText().equals(account.getName())) {
-            account.setName(name_field.getText());
-            service.updateAccountNameFromDB(account.getName(), account.getEmail());
+        // Check account name
+        if (Pattern.matches("[\\W\\d]+", name_field.getText())) {
+            name_field.setBackground(Color.pink);
+        }
+        else {
+            name_field.setBackground(Color.white);
+            name_check = true;
         }
 
-        // Change account surname
-        if (!surname_field.getText().equals(account.getSurname())) {
-            account.setSurname(surname_field.getText());
-            service.updateAccountSurnameFromDB(account.getSurname(), account.getEmail());
+        // Check account surname
+        if (Pattern.matches("[\\W\\d]+", surname_field.getText())) {
+            surname_field.setBackground(Color.pink);
+        }
+        else {
+            surname_field.setBackground(Color.white);
+            surname_check = true;
         }
 
-        // Change account Phone Number
-        if (!phone_field.getText().equals(account.getPhoneNo())) {
-            account.setPhoneNo(phone_field.getText());
-            service.updateAccountPhoneNoFromDB(account.getPhoneNo(), account.getEmail());
+        // Check account Phone Number
+        if (Pattern.matches("[^\\d]+", phone_field.getText()) ||
+                phone_field.getText().length() != 10) {
+            phone_field.setBackground(Color.pink);
+        }
+        else {
+            phone_field.setBackground(Color.white);
+            phoneNo_check = true;
         }
 
-        AppFrame app = AppFrame.getInstance();
-        app.openRestaurantsPage();
+        if(password_check && name_check && surname_check && phoneNo_check) {
+            error_label.setText("");
+
+            if(!pass1.equals(account.getPassword()) && !pass1.isEmpty()) {
+                account.setPassword(pass1);
+                service.updateAccountPasswordFromDB(account.getPassword(), account.getEmail());
+            }
+
+            if(!name_field.getText().equals(account.getName()) && !name_field.getText().isEmpty()) {
+                account.setName(name_field.getText());
+                service.updateAccountNameFromDB(account.getName(), account.getEmail());
+            }
+
+            if(!surname_field.getText().equals(account.getName()) && !surname_field.getText().isEmpty()) {
+                account.setSurname(surname_field.getText());
+                service.updateAccountSurnameFromDB(account.getSurname(), account.getEmail());
+            }
+
+            if(!phone_field.getText().equals(account.getPhoneNo()) && !phone_field.getText().isEmpty()) {
+                account.setPhoneNo(phone_field.getText());
+                service.updateAccountPhoneNoFromDB(account.getPhoneNo(), account.getEmail());
+            }
+
+            AppFrame app = AppFrame.getInstance();
+            app.openRestaurantsPage();
+        }
+        else {
+            error_label.setText("Informatii invalide, va rugam sa incercati din nou");
+        }
     }
 
     private void disconnect_buttonActionPerformed(ActionEvent e) {
@@ -102,22 +151,16 @@ public class AccountPanel extends JPanel {
         phone_field = new JTextField();
         confirm_button = new JButton();
         disconnect_button = new JButton();
+        error_label = new JLabel();
         bg_label = new JLabel();
 
         //======== this ========
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing
-                .border.EmptyBorder(0, 0, 0, 0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax.swing.border.TitledBorder
-                .CENTER, javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dia\u006cog", java.
-                awt.Font.BOLD, 12), java.awt.Color.red), getBorder()))
-        ;
-        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            @Override
-            public void propertyChange(java.beans.PropertyChangeEvent e
-            ) {
-                if ("bord\u0065r".equals(e.getPropertyName())) throw new RuntimeException();
-            }
-        })
-        ;
+        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing.
+        border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER
+        ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font
+        . BOLD ,12 ) ,java . awt. Color .red ) , getBorder () ) );  addPropertyChangeListener(
+        new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r"
+        .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
         setLayout(null);
 
         //---- exit_button ----
@@ -285,6 +328,13 @@ public class AccountPanel extends JPanel {
         add(disconnect_button);
         disconnect_button.setBounds(5, 540, 200, 50);
 
+        //---- error_label ----
+        error_label.setHorizontalAlignment(SwingConstants.CENTER);
+        error_label.setForeground(Color.red);
+        error_label.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
+        add(error_label);
+        error_label.setBounds(230, 495, 400, 30);
+
         //---- bg_label ----
         bg_label.setIcon(new ImageIcon(getClass().getResource("/login_page_bg.jpeg")));
         bg_label.setVerticalAlignment(SwingConstants.TOP);
@@ -295,7 +345,7 @@ public class AccountPanel extends JPanel {
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
-            for (int i = 0; i < getComponentCount(); i++) {
+            for(int i = 0; i < getComponentCount(); i++) {
                 Rectangle bounds = getComponent(i).getBounds();
                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -328,6 +378,7 @@ public class AccountPanel extends JPanel {
     private JTextField phone_field;
     private JButton confirm_button;
     private JButton disconnect_button;
+    private JLabel error_label;
     private JLabel bg_label;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

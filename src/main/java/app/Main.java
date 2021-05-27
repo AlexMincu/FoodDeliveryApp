@@ -1,6 +1,5 @@
 package app;
 
-import app.gui.*;
 import app.service.Service;
 
 public class Main {
@@ -12,8 +11,5 @@ public class Main {
 
 //        service.firstStartApp();
         service.startApp();
-
-
-        AppFrame appFrame = AppFrame.getInstance();
     }
 }

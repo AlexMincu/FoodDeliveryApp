@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Sun May 23 22:11:25 EEST 2021
- */
-
 package app.gui;
 
 import app.model.OrderProduct;
@@ -17,7 +13,7 @@ import java.io.File;
 
 public class Product2CartPane extends JPanel {
     private final Logger logger = LogManager.getLogger(Product2CartPane.class);
-    private OrderProduct product;
+    private final OrderProduct product;
 
     public Product2CartPane(OrderProduct product) {
         logger.debug("Creating Product Pane for Cart Page with id '" + product.getProduct().getId_product() + "'");

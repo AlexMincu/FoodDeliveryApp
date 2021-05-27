@@ -231,6 +231,17 @@ new FormModel {
 				"x": 580
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "error_label"
+				"horizontalAlignment": 0
+				"foreground": new java.awt.Color( 255, 0, 0, 255 )
+				"font": new java.awt.Font( "Segoe UI Semibold", 2, 14 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 400
+				"height": 30
+				"x": 225
+				"y": 450
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "bg_label"
 				"icon": new com.jformdesigner.model.SwingIcon( 0, "/login_page_bg.jpeg" )
 				"verticalAlignment": 1

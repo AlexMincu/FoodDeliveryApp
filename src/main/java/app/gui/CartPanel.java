@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Sun May 23 17:33:50 EEST 2021
- */
-
 package app.gui;
 
 import app.service.Service;
